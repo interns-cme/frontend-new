@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "examInstanceID": "23",
+      "examDate": "2014-05-03",
+      "examName": "AST",
+      "examScore": "1500",
+      "uni": "LAU"
+    },
+    {
+      "id": 2,
+      "examInstanceID": "99",
+      "examDate": "2014-05-03",
+      "examName": "TCA",
+      "examScore": "1220",
+      "uni": "AUB"
+    }
+  ]
