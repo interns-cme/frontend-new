@@ -87,11 +87,9 @@
 /* Implementing media queries for mobile */
 
 @media screen and (max-width: 1400px) {
-
   .navbar-logo {
     font-size: 1.45em;
   }
-
 }
 
 @media screen and (max-width: 960px) {

@@ -1,14 +1,12 @@
-import './App.css';
-import RoutesHandler from './routes/RouteHandler';
+import "./App.css";
+import RoutesHandler from "./routes/RouteHandler";
 
 function App() {
-
   return (
     <>
-    <RoutesHandler/>
-
+      <RoutesHandler />
     </>
-  )
+  );
 }
 
 export default App;
