@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { NavigateFunction } from "react-router-dom";
-import { User } from "../models/iUserProps";
+import { User } from "../models/IUserProps.model";
 type SetUser = Dispatch<SetStateAction<User | null>>;
 
 const useCheckLoggedIn = (navigate: NavigateFunction, setUser: SetUser) => {

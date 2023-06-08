@@ -1,9 +1,6 @@
 import { Alert, Box, Button, Snackbar } from "@mui/material";
 import React, { useState } from "react";
-
-interface SeatProps {
-  isReserved: boolean;
-}
+import { SeatProps } from "../../../models/ISeat.model";
 
 const Seat: React.FC<SeatProps> = ({ isReserved }) => {
   const [reserved, setisReserved] = useState(isReserved);

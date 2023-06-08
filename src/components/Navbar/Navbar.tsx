@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import useCheckLoggedIn from "../../hooks/useCheckLoggedIn";
-import { User } from "../../models/iUserProps";
+import { User } from "../../models/IUserProps.model";
 
 function Navbar() {
   const navigate = useNavigate();
