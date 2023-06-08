@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Table from "./Table/Table";
 import Seat from "./Seat/Seat";
+import Floor from "./Floor/Floor";
 
 const BookingArea: React.FC = () => {
   const [selectedBuilding, setSelectedBuilding] = useState("BDD 1227");
@@ -48,98 +49,7 @@ const BookingArea: React.FC = () => {
         <MenuItem value="floor1">Floor 7</MenuItem>
         <MenuItem value="floor2">Floor 8</MenuItem>
       </Select>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            border: "solid 1px",
-            backgroundColor: "#D5C3B4",
-            p: 2,
-            width: "400px",
-            height: "800px",
-            m: 2,
-          }}
-        >
-          <Box
-            sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-          >
-            <Table />
-            <Divider />
-            <Table />
-            <Table />
-            <Box
-              sx={{
-                border: "solid 1px",
-                marginLeft: 0,
-                p: "4px",
-                width: "min-content",
-              }}
-            >
-              <Table />
-              <Table />
-            </Box>
-            <Box
-              sx={{
-                border: "solid 1px",
-                marginLeft: 0,
-                width: "120px",
-                height: "100px",
-              }}
-            >
-              <Box sx={{ float: "right" }}>
-                <Seat isReserved={true} />
-              </Box>
-              <Box sx={{ float: "left" }}>
-                <Seat isReserved={true} />
-              </Box>
-            </Box>
-          </Box>
-          <Box sx={{ float: "right", right: 0, marginLeft: "130px" }}>
-            <Box
-              sx={{
-                border: "solid 1px",
-                marginLeft: 0,
-                width: "120px",
-                height: "100px",
-              }}
-            >
-              <Box sx={{ float: "right" }}>
-                <Seat isReserved={true} />
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                border: "solid 1px",
-                marginLeft: 0,
-                width: "120px",
-                height: "100px",
-              }}
-            >
-              <Box sx={{ float: "right" }}>
-                <Seat isReserved={true} />
-                <Seat isReserved={true} />
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                marginTop: "100px",
-                border: "solid 1px",
-                marginLeft: 0,
-                width: "120px",
-                height: "100px",
-              }}
-            ></Box>
-          </Box>
-        </Box>
-      </Box>
+      <Floor />
     </>
   );
 };

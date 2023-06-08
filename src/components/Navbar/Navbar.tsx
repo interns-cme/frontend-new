@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import useCheckLoggedIn from "../../hooks/useCheckLoggedIn";
+// import useCheckLoggedIn from "../../hooks/useCheckLoggedIn";
 import { User } from "../../models/IUserProps.model";
 
 function Navbar() {
@@ -14,7 +14,7 @@ function Navbar() {
   const [clicked, setClicked] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  useCheckLoggedIn(navigate, setCurrentUser);
+  // useCheckLoggedIn(navigate, setCurrentUser);
 
   // When the menu bar is clicked, the boolean state reverses itself
   function handleClick() {
@@ -73,7 +73,7 @@ function Navbar() {
       <ul className={clicked ? "nav-menu active" : "nav-menu"}>
         {/* Mapping the data in the MenuItems array into each li tag */}
 
-        {!currentUser
+        {false
           ? menuItems.map((item, index) => {
               return (
                 <a key={index} href={item.url} className={item.cName}>
@@ -90,7 +90,7 @@ function Navbar() {
             })}
       </ul>
 
-      {currentUser ? (
+      {false ? (
         <button onClick={handleLogout} className="nav-button btn btn--primary ">
           Log Out
         </button>

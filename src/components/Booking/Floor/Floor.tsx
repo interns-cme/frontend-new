@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Divider } from "@mui/material";
 import Table from "../Table/Table";
 import Seat from "../Seat/Seat";
+import Room from "../Room/Room";
 
 const BookingArea: React.FC = () => {
   return (
@@ -21,7 +22,7 @@ const BookingArea: React.FC = () => {
             border: "solid 1px",
             backgroundColor: "#D5C3B4",
             p: 2,
-            width: "400px",
+            width: "min-content",
             height: "800px",
             m: 2,
           }}
@@ -86,15 +87,7 @@ const BookingArea: React.FC = () => {
                 <Seat isReserved={true} />
               </Box>
             </Box>
-            <Box
-              sx={{
-                marginTop: "100px",
-                border: "solid 1px",
-                marginLeft: 0,
-                width: "120px",
-                height: "100px",
-              }}
-            ></Box>
+            <Room />
           </Box>
         </Box>
       </Box>
