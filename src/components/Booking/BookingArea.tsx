@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
 import {
   CssBaseline,
   MenuItem,
@@ -27,7 +26,6 @@ const BookingArea: React.FC = () => {
   };
   return (
     <>
-      <Navbar />
       <Typography sx={{ marginTop: "100px" }}>
         <h2>
           Welcome to our CME Office Seat Reservation Website! Reserve your ideal

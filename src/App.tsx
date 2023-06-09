@@ -1,13 +1,18 @@
 import { Container } from "@mui/material";
 import "./App.css";
-import RoutesHandler from "./routes/RoutesHandler";
+import { BrowserRouter } from "react-router-dom";
+import { ReactKeycloakProvider } from "@react-keycloak-fork/web";
+import keycloak from "./utils/keycloak";
+import RouterProvider from "./routes/RouterProvider/RouterProvider";
 
 function App() {
   return (
     <>
-      <Container maxWidth="xl">
-        <RoutesHandler />
-      </Container>
+      <ReactKeycloakProvider authClient={keycloak}>
+        <BrowserRouter>
+          <RouterProvider />
+        </BrowserRouter>
+      </ReactKeycloakProvider>
     </>
   );
 }

@@ -1,6 +1,5 @@
 import { Box, Button, Card, CardMedia, Container, Paper } from "@mui/material";
 import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
 function HomePage() {
@@ -11,7 +10,6 @@ function HomePage() {
   return (
     <div className=".bg">
       <Container maxWidth={false}>
-        <Navbar />
         <h2 style={{ color: "#7f2c8e" }}>
           Welcome to our Office Seat Reservation website! Here, you can easily
           reserve seats at our company office and enjoy a comfortable and
