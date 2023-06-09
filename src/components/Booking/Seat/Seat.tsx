@@ -2,20 +2,20 @@ import { Alert, Box, Button, Snackbar } from "@mui/material";
 import React, { useState } from "react";
 import { SeatProps } from "../../../models/ISeat.model";
 
-const Seat: React.FC<SeatProps> = ({ isReserved }) => {
-  const [reserved, setisReserved] = useState(isReserved);
+const Seat: React.FC<SeatProps> = ({ status }) => {
+  const [reserved, setstatus] = useState(status);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleClick = () => {
     if (reserved === true) window.alert("Seat already reserved");
     else {
-      setisReserved(!reserved);
+      setstatus(!reserved);
       setShowSnackbar(true);
     }
   };
   const handleUndo = () => {
     setShowSnackbar(false);
-    setisReserved(false);
+    setstatus(false);
   };
   return (
     <Box>

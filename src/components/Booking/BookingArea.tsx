@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import {
-  Box,
   CssBaseline,
-  Divider,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -12,8 +10,11 @@ import {
 import Table from "./Table/Table";
 import Seat from "./Seat/Seat";
 import Floor from "./Floor/Floor";
+import { useParams } from "react-router-dom";
 
 const BookingArea: React.FC = () => {
+  const { floor } = useParams();
+  console.log(floor);
   const [selectedBuilding, setSelectedBuilding] = useState("BDD 1227");
   const [selectedFloor, setSelectedFloor] = useState("floor1");
 
@@ -49,7 +50,7 @@ const BookingArea: React.FC = () => {
         <MenuItem value="floor1">Floor 7</MenuItem>
         <MenuItem value="floor2">Floor 8</MenuItem>
       </Select>
-      <Floor />
+      <Floor floor_number={floor} />
     </>
   );
 };

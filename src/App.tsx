@@ -1,10 +1,13 @@
+import { Container } from "@mui/material";
 import "./App.css";
 import RoutesHandler from "./routes/RoutesHandler";
 
 function App() {
   return (
     <>
-      <RoutesHandler />
+      <Container maxWidth="xl">
+        <RoutesHandler />
+      </Container>
     </>
   );
 }

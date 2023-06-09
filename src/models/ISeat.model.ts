@@ -1,3 +1,4 @@
 export interface SeatProps {
-    isReserved: boolean;
+    seat_id: number
+    status: boolean;
   }
