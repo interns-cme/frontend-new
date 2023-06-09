@@ -1,5 +1,5 @@
 export interface KeyCloakToken {
-  idToken: string;
-  refreshToken: string;
-  token: string;
+  idToken: string | undefined;
+  refreshToken: string | undefined;
+  token: string | undefined;
 }

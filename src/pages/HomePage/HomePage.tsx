@@ -10,24 +10,7 @@ function HomePage() {
   return (
     <div className=".bg">
       <Container maxWidth={false}>
-        <h2 style={{ color: "#7f2c8e" }}>
-          Welcome to our Office Seat Reservation website! Here, you can easily
-          reserve seats at our company office and enjoy a comfortable and
-          productive work environment. Take control of your seating preferences
-          and secure your spot with just a few clicks. Start reserving your
-          ideal seat today and enhance your office experience!
-        </h2>
-        <Button
-          sx={{
-            background: "#f5f0f8",
-            color: "#7f2c8e",
-            width: "100px",
-            p: "4px",
-            m: 1,
-          }}
-        >
-          <h4>Book Now</h4>
-        </Button>
+        <h1 style={{ color: "#7f2c8e" }}>Choose a Floor</h1>
         <Box
           display="flex"
           sx={{
@@ -35,7 +18,6 @@ function HomePage() {
             justifyContent: "center",
             alignItems: "center",
             height: "400px",
-            overflow: "auto",
           }}
         >
           <Paper

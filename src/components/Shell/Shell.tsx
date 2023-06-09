@@ -9,20 +9,35 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
-import { Drawer, List, ListItem, ListItemText } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Link, useLocation } from "react-router-dom";
+
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
 
 function Shell() {
+  const location = useLocation();
+  console.log(location.pathname);
+  const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
-    baseURL: "http://localhost:8080", // Backend API URL
+    baseURL: "https://8c12-193-227-191-93.ngrok-free.app/auth",
   });
 
   api.interceptors.request.use(
     (config) => {
       if (keycloak.authenticated) {
-        config.headers.Authorization = `Bearer ${keycloak.token}`;
+        console.log("authenticated");
+        config.headers.Authorization = keycloak.token;
       }
       return config;
     },
@@ -31,34 +46,36 @@ function Shell() {
     }
   );
 
-  const [currentUser, setCurrentUser] = useState<KeyCloakToken | null>({
-    idToken: "3",
-    refreshToken: "hi",
-    token: "there",
-  });
+  const [currentUser, setCurrentUser] = useState<KeyCloakToken | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     console.log(keycloak);
-
-    if (keycloak.authenticated !== undefined && keycloak.tokenParsed) {
+    if (keycloak.authenticated !== false) {
       setCurrentUser({
-        idToken: keycloak.tokenParsed.sub || "",
-        refreshToken: keycloak.tokenParsed.username,
-        token: keycloak.tokenParsed.password,
+        idToken: keycloak.idToken,
+        refreshToken: keycloak.refreshToken,
+        token: keycloak.token,
       });
     } else {
       setCurrentUser(null);
     }
-  }, []);
+    console.log(currentUser);
+  }, [keycloak.authenticated]);
 
   function handleLogout() {
+    setCurrentUser(null);
     keycloak.logout();
+    setAnchorEl(null);
   }
 
   function handleLogin() {
     keycloak.login();
   }
+
+  const handleAvatarClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -72,7 +89,7 @@ function Shell() {
     },
     {
       title: "Book a Seat",
-      url: "/book",
+      url: "/bookingPage/7",
       cName: "nav-links",
     },
     {
@@ -86,19 +103,87 @@ function Shell() {
     <div>
       <AppBar position="fixed" style={{ backgroundColor: "#7f2c8e" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleMenu}
-            sx={{ mr: 0 }} // Add margin to push the IconButton to the right
-          >
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
+          {currentUser ? (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleMenu}
+              sx={{ mr: 0 }}
+            >
+              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          ) : (
+            <Button
+              sx={{
+                display: "none",
+              }}
+            ></Button>
+          )}
+
           <Typography variant="h5" component="div" sx={{ flex: 1 }}>
             CME Seat Booking
           </Typography>
+          {currentUser ? (
+            <div>
+              <IconButton
+                sx={{
+                  "&:focus": {
+                    outline: "none",
+                  },
+                }}
+                onClick={handleAvatarClick}
+                color="inherit"
+              >
+                <Avatar
+                  sx={{
+                    backgroundColor: "#4894c1",
+                    "&:hover": {
+                      transition: "all 0.2s ease-out",
+                      backgroundColor: "#4894c1",
+                      color: "#f5f0f8",
+                    },
+
+                    "&:focus": {
+                      outline: "none",
+                    },
+                  }}
+                >
+                  {currentUser.idToken &&
+                  keycloak.idTokenParsed !== undefined ? (
+                    keycloak.idTokenParsed.preferred_username
+                      .charAt(0)
+                      .toUpperCase()
+                  ) : (
+                    <p></p>
+                  )}
+                </Avatar>
+                <ArrowDropDownIcon
+                  sx={{
+                    backgroundColor: "#7f2c8e",
+
+                    "&:focus": {
+                      outline: "none",
+                    },
+                  }}
+                />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <Button
+              sx={{
+                display: "none",
+              }}
+            ></Button>
+          )}
         </Toolbar>
       </AppBar>
       <Toolbar />
@@ -118,17 +203,32 @@ function Shell() {
         }}
       >
         <List>
-          {loggedInMenuItems.map((item, index) => (
-            <ListItem
-              button
-              key={index}
-              component={NavLink}
-              to={item.url}
-              className={item.cName}
-            >
-              <ListItemText primary={item.title} />
-            </ListItem>
-          ))}
+          {currentUser ? (
+            loggedInMenuItems.map((item, index) => (
+              <ListItem
+                button
+                key={index}
+                component={NavLink}
+                to={item.url}
+                className={item.cName}
+              >
+                <ListItemText primary={item.title} />
+              </ListItem>
+            ))
+          ) : (
+            <p></p>
+          )}
+        </List>
+      </Drawer>
+      {location.pathname === "/" ? (
+        <div>
+          <h2 style={{ color: "#7f2c8e" }}>
+            Welcome to our Office Seat Reservation website! Here, you can easily
+            reserve seats at our company office and enjoy a comfortable and
+            productive work environment. Take control of your seating
+            preferences and secure your spot with just a few clicks. Start
+            reserving your ideal seat today and enhance your office experience!
+          </h2>
           {!currentUser ? (
             <Button
               sx={{
@@ -144,7 +244,6 @@ function Shell() {
                 outline: "none",
                 border: "none",
                 cursor: "pointer",
-                marginTop: 1,
                 marginLeft: 0,
                 "&:hover": {
                   transition: "all 0.3s ease-out",
@@ -158,36 +257,30 @@ function Shell() {
               Log In
             </Button>
           ) : (
-            <Button
-              sx={{
-                backgroundColor: "#f5f0f8",
-                color: "#7f2c8e",
-                height: 38,
-                width: 140,
-                textDecoration: "none",
-                fontSize: "1.1em",
-                fontWeight: 650,
-                padding: "7px 18px",
-                borderRadius: 4,
-                outline: "none",
-                border: "none",
-                cursor: "pointer",
-                marginTop: 1,
-                marginRight: 0,
-                "&:hover": {
-                  transition: "all 0.3s ease-out",
-                  backgroundColor: "#4894c1",
-                  color: "#f5f0f8",
-                },
-              }}
-              color="inherit"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Button>
+            <Link to={"/home"}>
+              <Button
+                sx={{
+                  background: "#f5f0f8",
+                  color: "#7f2c8e",
+                  width: "9em",
+                  p: "4px",
+                  m: 1,
+                  fontWeight: 650,
+                  fontSize: "1.2em",
+                  "&:hover": {
+                    transition: "all 0.3s ease-out",
+                    backgroundColor: "#4894c1",
+                    color: "#f5f0f8",
+                  },
+                }}
+              >
+                BOOK NOW!
+              </Button>
+            </Link>
           )}
-        </List>
-      </Drawer>
+        </div>
+      ) : null}
+
       <Outlet />
     </div>
   );

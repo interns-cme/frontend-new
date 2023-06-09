@@ -1,5 +1,5 @@
-import Book from "../../pages/Book";
-import MyBookings from "../../pages/Book";
+import BookingArea from "../../components/Booking/BookingArea";
+import HomePage from "../../pages/HomePage/HomePage";
 
 export interface RouteConfig {
   path: string;
@@ -8,11 +8,12 @@ export interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   {
-    path: "/book",
-    component: Book,
+    path: "/home",
+    component: HomePage,
   },
+
   {
-    path: "/myBookings",
-    component: MyBookings,
+    path: "/bookingPage/:floor",
+    component: BookingArea,
   },
 ];
