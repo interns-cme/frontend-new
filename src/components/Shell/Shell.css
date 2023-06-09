@@ -1,0 +1,50 @@
+.navbarItems {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .navbarItems .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav-links {
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 0.7rem;
+  }
+  
+  .nav-links:hover {
+    background: #ffffff;
+    color: #5d5d5d;
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+  }
+  
+  .navbar-logo {
+    color: #ffff;
+    font-size: 1.6em;
+    margin-left: 0.5rem;
+    float: left;
+  }
+  
+  .nav-links-mobile {
+    display: none;
+  }
+  
+  .MuiDrawer-paper {
+    background-color: #24262b;
+    padding-top: 80px;
+  }
+  
+  .MuiListItem-root {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .MuiListItemText-root {
+    color: black;
+  }
+  
