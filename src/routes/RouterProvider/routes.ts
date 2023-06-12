@@ -1,4 +1,5 @@
 import BookingArea from "../../components/Booking/BookingArea";
+import Shell from "../../components/Shell/Shell";
 import HomePage from "../../pages/HomePage/HomePage";
 
 export interface RouteConfig {

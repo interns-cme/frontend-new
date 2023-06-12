@@ -6,6 +6,7 @@ import Room from "../Room/Room";
 import { SeatProps } from "../../../models/ISeat.model";
 import { FloorProps } from "../../../models/IFloor.model";
 import Floor8 from "./Floor8";
+import NotFound404 from "../../NotFound404/NotFound404";
 
 const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   const seats: SeatProps[] = [
@@ -105,8 +106,9 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
           </Box>
         </Box>
       ) : (
-        <Floor8 floor_number={floor_number} />
+        <NotFound404 />
       )}
+      {floor_number === "8" ? <Floor8 floor_number={floor} /> : <NotFound404 />}
     </>
   );
 };

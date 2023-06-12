@@ -1,36 +1,37 @@
-import { useEffect, useState } from "react";
-import "./Shell.css";
+import React, { useEffect, useState } from "react";
 import { useKeycloak } from "@react-keycloak-fork/web";
 import { KeyCloakToken } from "../../models/IKeyCloakToken";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import MenuIcon from "@mui/icons-material/Menu";
-import Button from "@mui/material/Button";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link, useLocation } from "react-router-dom";
-
 import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+  Avatar,
+  Menu,
+  MenuItem,
   Drawer,
   List,
   ListItem,
   ListItemText,
-  Avatar,
-  Menu,
-  MenuItem,
 } from "@mui/material";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Link, useLocation, Outlet } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import axios from "axios";
 
-function Shell() {
+interface ShellProps {
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+
+function Shell({ isAuthenticated, isLoading }: ShellProps) {
   const location = useLocation();
-  console.log(location.pathname);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
-    baseURL: "https://8c12-193-227-191-93.ngrok-free.app/auth",
+    baseURL: "https://6af2-193-227-191-93.ngrok-free.app/auth",
   });
 
   api.interceptors.request.use(
@@ -50,7 +51,6 @@ function Shell() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    console.log(keycloak);
     if (keycloak.authenticated !== false) {
       setCurrentUser({
         idToken: keycloak.idToken,
@@ -60,7 +60,6 @@ function Shell() {
     } else {
       setCurrentUser(null);
     }
-    console.log(currentUser);
   }, [keycloak.authenticated]);
 
   function handleLogout() {
@@ -73,7 +72,7 @@ function Shell() {
     keycloak.login();
   }
 
-  const handleAvatarClick = (event: any) => {
+  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -174,7 +173,9 @@ function Shell() {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
               >
-                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+                <Link to={"/"}>
+                  <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+                </Link>
               </Menu>
             </div>
           ) : (
@@ -229,7 +230,9 @@ function Shell() {
             preferences and secure your spot with just a few clicks. Start
             reserving your ideal seat today and enhance your office experience!
           </h2>
-          {!currentUser ? (
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : !currentUser && !keycloak.authenticated ? (
             <Button
               sx={{
                 backgroundColor: "#f5f0f8",
@@ -280,7 +283,6 @@ function Shell() {
           )}
         </div>
       ) : null}
-
       <Outlet />
     </div>
   );
