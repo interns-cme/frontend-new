@@ -26,7 +26,6 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            overflow: "auto",
           }}
         >
           <Box
@@ -43,10 +42,10 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             <Box
               sx={{ display: "flex", flexDirection: "column", height: "100%" }}
             >
-              <Table Seats={seats} id={0} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
               <Divider />
-              <Table Seats={seats} id={0} />
-              <Table Seats={seats} id={0} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
               <Box
                 sx={{
                   border: "solid 1px",
@@ -55,8 +54,8 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
                   width: "min-content",
                 }}
               >
-                <Table Seats={seats} id={0} />
-                <Table Seats={seats} id={0} />
+                <Table Seats={seats} id={0} isTwoSided={false} />
+                <Table Seats={seats} id={0} isTwoSided={false} />
               </Box>
               <Box
                 sx={{

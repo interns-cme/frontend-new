@@ -25,12 +25,12 @@ const Floor8: React.FC = () => {
     { seat_id: 8, status: false },
   ];
   const tables: React.ReactElement[] = [
-    <Table Seats={seats} id={0} />,
-    <Table Seats={seats} id={1} />,
-    <Table Seats={seats} id={2} />,
-    <Table Seats={seats} id={3} />,
-    <Table Seats={seats} id={4} />,
-    <Table Seats={seats} id={5} />,
+    <Table Seats={seats} id={0} isTwoSided={false} />,
+    <Table Seats={seats} id={1} isTwoSided={false} />,
+    <Table Seats={seats} id={2} isTwoSided={true} />,
+    <Table Seats={seats} id={3} isTwoSided={true} />,
+    <Table Seats={seats} id={4} isTwoSided={false} />,
+    <Table Seats={seats} id={5} isTwoSided={true} />,
     // <Seat key="7" status={false} />,
     // <Seat key="8" status={false} />,
     // <Seat key="9" status={false} />,
@@ -44,7 +44,6 @@ const Floor8: React.FC = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          overflow: "auto",
         }}
       >
         <Box
@@ -61,10 +60,10 @@ const Floor8: React.FC = () => {
           <Box
             sx={{ display: "flex", flexDirection: "column", height: "100%" }}
           >
-            <Table Seats={seats} id={0} />
+            <Table Seats={seats} id={0} isTwoSided={false} />
             <Divider />
-            <Table Seats={seats2} id={0} />
-            <Table Seats={seats} id={0} />
+            <Table Seats={seats2} id={0} isTwoSided={true} />
+            <Table Seats={seats} id={0} isTwoSided={false} />
             <Box
               sx={{
                 border: "solid 1px",
@@ -73,8 +72,8 @@ const Floor8: React.FC = () => {
                 width: "min-content",
               }}
             >
-              <Table Seats={seats2} id={0} />
-              <Table Seats={seats} id={0} />
+              <Table Seats={seats2} id={0} isTwoSided={false} />
+              <Table Seats={seats} id={0} isTwoSided={true} />
             </Box>
           </Box>
           <Box
@@ -95,10 +94,10 @@ const Floor8: React.FC = () => {
           <Box
             sx={{ display: "flex", flexDirection: "column", height: "100%" }}
           >
-            <Table Seats={seats2} id={0} />
+            <Table Seats={seats2} id={0} isTwoSided={false} />
             <Divider />
-            <Table Seats={seats2} id={0} />
-            <Table Seats={seats} id={0} />
+            <Table Seats={seats2} id={0} isTwoSided={false} />
+            <Table Seats={seats} id={0} isTwoSided={false} />
             <Box
               sx={{
                 border: "solid 1px",
@@ -107,8 +106,8 @@ const Floor8: React.FC = () => {
                 width: "min-content",
               }}
             >
-              <Table Seats={seats2} id={0} />
-              <Table Seats={seats2} id={0} />
+              <Table Seats={seats2} id={0} isTwoSided={false} />
+              <Table Seats={seats2} id={0} isTwoSided={false} />
             </Box>
           </Box>
         </Box>
