@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function HomePage() {
   const navigate = useNavigate();
   const handleFloorClick = (floor: number) => {
-    navigate(`/BookingPage/${floor}`);
+    navigate(`/booking/${floor}`);
   };
   return (
     <div className=".bg">

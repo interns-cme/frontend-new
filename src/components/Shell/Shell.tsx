@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import "./Shell.css";
 import { useKeycloak } from "@react-keycloak-fork/web";
 import { KeyCloakToken } from "../../models/IKeyCloakToken";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import Button from "@mui/material/Button";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Link, useLocation } from "react-router-dom";
+
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Button,
-  Avatar,
-  Menu,
-  MenuItem,
   Drawer,
   List,
   ListItem,
   ListItemText,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
-import { NavLink, Link, useLocation, Outlet } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
-import MenuIcon from "@mui/icons-material/Menu";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
 
-interface ShellProps {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-}
-
-function Shell({ isAuthenticated, isLoading }: ShellProps) {
+function Shell() {
   const location = useLocation();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  console.log(location.pathname);
+  const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
     baseURL: "https://6af2-193-227-191-93.ngrok-free.app/auth",
@@ -51,6 +50,7 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
+    console.log(keycloak);
     if (keycloak.authenticated !== false) {
       setCurrentUser({
         idToken: keycloak.idToken,
@@ -60,6 +60,7 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
     } else {
       setCurrentUser(null);
     }
+    console.log(currentUser);
   }, [keycloak.authenticated]);
 
   function handleLogout() {
@@ -72,7 +73,7 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
     keycloak.login();
   }
 
-  const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleAvatarClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -83,14 +84,15 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
   const loggedInMenuItems = [
     {
       title: "Home",
-      url: "/home",
+      url: "/",
       cName: "nav-links",
     },
     {
-      title: "Book a Seat",
-      url: "/bookingPage/7",
+      title: "Book",
+      url: "/book",
       cName: "nav-links",
     },
+
     {
       title: "My Bookings",
       url: "/myBookings",
@@ -173,9 +175,7 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
               >
-                <Link to={"/"}>
-                  <MenuItem onClick={handleLogout}>Log Out</MenuItem>
-                </Link>
+                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
               </Menu>
             </div>
           ) : (
@@ -230,9 +230,7 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
             preferences and secure your spot with just a few clicks. Start
             reserving your ideal seat today and enhance your office experience!
           </h2>
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : !currentUser && !keycloak.authenticated ? (
+          {!currentUser && !keycloak.authenticated ? (
             <Button
               sx={{
                 backgroundColor: "#f5f0f8",
@@ -257,10 +255,10 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
               color="inherit"
               onClick={handleLogin}
             >
-              Log In
+              {!keycloak.authenticated ? "Log In" : "Loading"}
             </Button>
           ) : (
-            <Link to={"/home"}>
+            <Link to={"/book"}>
               <Button
                 sx={{
                   background: "#f5f0f8",
@@ -277,12 +275,13 @@ function Shell({ isAuthenticated, isLoading }: ShellProps) {
                   },
                 }}
               >
-                BOOK NOW!
+                {keycloak.authenticated ? "BOOK NOW" : "Loading"}
               </Button>
             </Link>
           )}
         </div>
       ) : null}
+
       <Outlet />
     </div>
   );

@@ -6,7 +6,7 @@ import Room from "../Room/Room";
 import { SeatProps } from "../../../models/ISeat.model";
 import { FloorProps } from "../../../models/IFloor.model";
 import Floor8 from "./Floor8";
-import NotFound404 from "../../NotFound404/NotFound404";
+import { useNavigate } from "react-router-dom";
 
 const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   const seats: SeatProps[] = [
@@ -17,7 +17,11 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
     { seat_id: 5, status: false },
     { seat_id: 6, status: true },
   ];
+  const navigate = useNavigate();
   console.log(floor_number);
+  if (floor_number !== "7" && floor_number !== "8") {
+    navigate("/404");
+  }
   return (
     <>
       {floor_number === "7" ? (
@@ -27,7 +31,6 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            overflow: "auto",
           }}
         >
           <Box
@@ -44,10 +47,10 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             <Box
               sx={{ display: "flex", flexDirection: "column", height: "100%" }}
             >
-              <Table Seats={seats} id={0} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
               <Divider />
-              <Table Seats={seats} id={0} />
-              <Table Seats={seats} id={0} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
+              <Table Seats={seats} id={0} isTwoSided={false} />
               <Box
                 sx={{
                   border: "solid 1px",
@@ -56,8 +59,8 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
                   width: "min-content",
                 }}
               >
-                <Table Seats={seats} id={0} />
-                <Table Seats={seats} id={0} />
+                <Table Seats={seats} id={0} isTwoSided={false} />
+                <Table Seats={seats} id={0} isTwoSided={false} />
               </Box>
               <Box
                 sx={{
@@ -106,9 +109,8 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
           </Box>
         </Box>
       ) : (
-        <NotFound404 />
+        <Floor8 floor_number={floor_number} />
       )}
-      {floor_number === "8" ? <Floor8 floor_number={floor} /> : <NotFound404 />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import BookingArea from "../../components/Booking/BookingArea";
-import Shell from "../../components/Shell/Shell";
+import NotFound404 from "../../components/NotFound404/NotFound404";
 import HomePage from "../../pages/HomePage/HomePage";
 
 export interface RouteConfig {
@@ -9,12 +9,16 @@ export interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   {
-    path: "/home",
+    path: "/book",
     component: HomePage,
   },
 
   {
-    path: "/bookingPage/:floor",
+    path: `/booking/:floor`,
     component: BookingArea,
+  },
+  {
+    path: `/404`,
+    component: NotFound404,
   },
 ];

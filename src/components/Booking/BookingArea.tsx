@@ -9,20 +9,20 @@ import {
 import Table from "./Table/Table";
 import Seat from "./Seat/Seat";
 import Floor from "./Floor/Floor";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BookingArea: React.FC = () => {
   const { floor } = useParams();
   console.log(floor);
-  const [selectedBuilding, setSelectedBuilding] = useState("BDD 1227");
-  const [selectedFloor, setSelectedFloor] = useState("floor1");
-
-  const handleBuildingChange = (event: SelectChangeEvent<string>) => {
-    setSelectedBuilding(event.target.value);
+  const [selectedFloor, setSelectedFloor] = useState("7");
+  const navigate = useNavigate();
+  const handleFloorClick = (floor: string) => {
+    navigate(`/booking/${floor}`);
   };
 
   const handleFloorChange = (event: SelectChangeEvent<string>) => {
     setSelectedFloor(event.target.value);
+    handleFloorClick(event.target.value);
   };
   return (
     <>
@@ -34,19 +34,12 @@ const BookingArea: React.FC = () => {
       </Typography>
       <CssBaseline />
       <Select
-        value={selectedBuilding}
-        onChange={handleBuildingChange}
-        sx={{ width: "200px", m: 1 }}
-      >
-        <MenuItem value="BDD 1227">BDD 1227</MenuItem>
-      </Select>
-      <Select
         value={selectedFloor}
         onChange={handleFloorChange}
         sx={{ width: "200px", m: 1 }}
       >
-        <MenuItem value="floor1">Floor 7</MenuItem>
-        <MenuItem value="floor2">Floor 8</MenuItem>
+        <MenuItem value="7">Floor 7</MenuItem>
+        <MenuItem value="8">Floor 8</MenuItem>
       </Select>
       <Floor floor_number={floor} />
     </>
