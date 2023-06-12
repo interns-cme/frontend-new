@@ -30,7 +30,7 @@ function Shell() {
   const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
-    baseURL: "https://8c12-193-227-191-93.ngrok-free.app/auth",
+    baseURL: "https://6af2-193-227-191-93.ngrok-free.app/auth",
   });
 
   api.interceptors.request.use(
@@ -84,14 +84,15 @@ function Shell() {
   const loggedInMenuItems = [
     {
       title: "Home",
-      url: "/home",
+      url: "/",
       cName: "nav-links",
     },
     {
-      title: "Book a Seat",
-      url: "/bookingPage/7",
+      title: "Book",
+      url: "/book",
       cName: "nav-links",
     },
+
     {
       title: "My Bookings",
       url: "/myBookings",
@@ -229,7 +230,7 @@ function Shell() {
             preferences and secure your spot with just a few clicks. Start
             reserving your ideal seat today and enhance your office experience!
           </h2>
-          {!currentUser ? (
+          {!currentUser && !keycloak.authenticated ? (
             <Button
               sx={{
                 backgroundColor: "#f5f0f8",
@@ -254,10 +255,10 @@ function Shell() {
               color="inherit"
               onClick={handleLogin}
             >
-              Log In
+              {!keycloak.authenticated ? "Log In" : "Loading"}
             </Button>
           ) : (
-            <Link to={"/home"}>
+            <Link to={"/book"}>
               <Button
                 sx={{
                   background: "#f5f0f8",
@@ -274,7 +275,7 @@ function Shell() {
                   },
                 }}
               >
-                BOOK NOW!
+                {keycloak.authenticated ? "BOOK NOW" : "Loading"}
               </Button>
             </Link>
           )}

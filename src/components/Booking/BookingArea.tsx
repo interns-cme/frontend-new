@@ -14,15 +14,10 @@ import { useNavigate, useParams } from "react-router-dom";
 const BookingArea: React.FC = () => {
   const { floor } = useParams();
   console.log(floor);
-  const [selectedBuilding, setSelectedBuilding] = useState("BDD 1227");
   const [selectedFloor, setSelectedFloor] = useState("7");
   const navigate = useNavigate();
   const handleFloorClick = (floor: string) => {
-    navigate(`/BookingPage/${floor}`);
-  };
-
-  const handleBuildingChange = (event: SelectChangeEvent<string>) => {
-    setSelectedBuilding(event.target.value);
+    navigate(`/booking/${floor}`);
   };
 
   const handleFloorChange = (event: SelectChangeEvent<string>) => {

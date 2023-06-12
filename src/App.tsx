@@ -1,4 +1,3 @@
-import { Container } from "@mui/material";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { ReactKeycloakProvider } from "@react-keycloak-fork/web";

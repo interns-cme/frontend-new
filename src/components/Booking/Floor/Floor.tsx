@@ -6,6 +6,7 @@ import Room from "../Room/Room";
 import { SeatProps } from "../../../models/ISeat.model";
 import { FloorProps } from "../../../models/IFloor.model";
 import Floor8 from "./Floor8";
+import { useNavigate } from "react-router-dom";
 
 const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   const seats: SeatProps[] = [
@@ -16,7 +17,11 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
     { seat_id: 5, status: false },
     { seat_id: 6, status: true },
   ];
+  const navigate = useNavigate();
   console.log(floor_number);
+  if (floor_number !== "7" && floor_number !== "8") {
+    navigate("/404");
+  }
   return (
     <>
       {floor_number === "7" ? (
