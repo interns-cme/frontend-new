@@ -5,6 +5,7 @@ import { useKeycloak } from "@react-keycloak-fork/web";
 import NotFound404 from "../../components/NotFound404/NotFound404";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import Container from "@mui/material/Container";
 
 function RouterProvider() {
   const { keycloak } = useKeycloak();
@@ -23,7 +24,7 @@ function RouterProvider() {
   }
 
   return (
-    <>
+    <Container maxWidth={false}>
       <Routes>
         <Route path="/" element={<Shell />}>
           {routes.map((route) => (
@@ -38,7 +39,7 @@ function RouterProvider() {
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
-    </>
+    </Container>
   );
 }
 

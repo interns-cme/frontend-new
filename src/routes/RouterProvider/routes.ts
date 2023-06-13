@@ -1,4 +1,4 @@
-import BookingArea from "../../components/Booking/BookingArea";
+import BookingArea from "../../pages/BookingArea/BookingArea";
 import HomePage from "../../pages/HomePage/HomePage";
 import MyBookings from "../../pages/MyBookings/MyBookings";
 
@@ -18,8 +18,5 @@ export const routes: RouteConfig[] = [
     component: MyBookings,
   },
 
-  // {
-  //   path: `/404`,
-  //   component: NotFound404,
-  // },
+
 ];

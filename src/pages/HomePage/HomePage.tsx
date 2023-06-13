@@ -29,11 +29,10 @@ function HomePage() {
               padding: "16px",
               m: 1,
               cursor: "pointer",
-              marginRight: "10px",
+              marginRight: "30px",
               "&:hover": {
                 transform: "scale(1.1)",
                 transition: "all 0.3s ease-out",
-                marginRight: "50px",
               },
             }}
             onClick={() => handleFloorClick(7)}
@@ -59,7 +58,6 @@ function HomePage() {
               "&:hover": {
                 transform: "scale(1.1)",
                 transition: "all 0.3s ease-out",
-                marginLeft: "50px",
               },
             }}
             onClick={() => handleFloorClick(8)}

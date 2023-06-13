@@ -5,7 +5,7 @@ const Room: React.FC = () => {
   return (
     <Box
       sx={{
-        marginTop: "100px",
+        marginTop: "10px",
         border: "solid 1px",
         marginLeft: 0,
         width: "120px",

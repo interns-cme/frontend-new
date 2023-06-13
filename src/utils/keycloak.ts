@@ -8,6 +8,12 @@ const initOptions = {
   responseType: "code",
 };
 
-const keycloak = new Keycloak(initOptions);
+
+
+
+const keycloak = Keycloak(initOptions);
+
+
+
 
 export default keycloak;
