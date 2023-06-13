@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   Drawer,
@@ -230,13 +230,25 @@ function Shell() {
         </List>
       </Drawer>
       {location.pathname === "/" ? (
-        <div>
+        <div
+          style={
+            {
+              // textAlign: "left",
+              // display: "flex",
+              // flexDirection: "column",
+              // justifyContent: "flex-start",
+            }
+          }
+        >
+          <h1 style={{ color: "#7f2c8e" }}>
+            Welcome to our Office Seat Reservation website!
+          </h1>
           <h2 style={{ color: "#7f2c8e" }}>
-            Welcome to our Office Seat Reservation website! Here, you can easily
-            reserve seats at our company office and enjoy a comfortable and
-            productive work environment. Take control of your seating
-            preferences and secure your spot with just a few clicks. Start
-            reserving your ideal seat today and enhance your office experience!
+            Here, you can easily reserve seats at our company office and enjoy a
+            comfortable and productive work environment. Take control of your
+            seating preferences and secure your spot with just a few clicks.
+            Start reserving your ideal seat today and enhance your office
+            experience!
           </h2>
           {!currentUser && !keycloak.authenticated ? (
             <Button
@@ -253,7 +265,6 @@ function Shell() {
                 outline: "none",
                 border: "none",
                 cursor: "pointer",
-                marginLeft: 0,
                 "&:hover": {
                   transition: "all 0.3s ease-out",
                   backgroundColor: "#4894c1",
@@ -272,6 +283,7 @@ function Shell() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                textAlign: "center",
                 height: "400px",
               }}
             >
@@ -284,11 +296,10 @@ function Shell() {
                   padding: "16px",
                   m: 1,
                   cursor: "pointer",
-                  marginRight: "10px",
+                  marginRight: "30px",
                   "&:hover": {
                     transform: "scale(1.1)",
                     transition: "all 0.3s ease-out",
-                    marginRight: "50px",
                   },
                 }}
                 onClick={() => handleFloorClick(7)}
@@ -314,7 +325,6 @@ function Shell() {
                   "&:hover": {
                     transform: "scale(1.1)",
                     transition: "all 0.3s ease-out",
-                    marginLeft: "50px",
                   },
                 }}
                 onClick={() => handleFloorClick(8)}

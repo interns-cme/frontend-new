@@ -1,5 +1,5 @@
-import BookingArea from "../../components/Booking/BookingArea";
-import AdminHome from "../../pages/AdminHome/AdminHome";
+import BookingArea from "../../pages/BookingArea/BookingArea";
+import HomePage from "../../pages/HomePage/HomePage";
 import MyBookings from "../../pages/MyBookings/MyBookings";
 
 export interface RouteConfig {
