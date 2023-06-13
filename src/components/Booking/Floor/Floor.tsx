@@ -28,9 +28,9 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   ];
   const navigate = useNavigate();
   console.log(floor_number);
-  if (floor_number !== "7" && floor_number !== "8") {
-    navigate("/404");
-  }
+  // if (floor_number !== "7" && floor_number !== "8") {
+  //   navigate("/404");
+  // }
   return (
     <Box sx={{ margin: "0 auto" }}>
       {floor_number === "7" ? (

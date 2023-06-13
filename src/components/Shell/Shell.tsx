@@ -28,9 +28,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
 
 function Shell() {
+  const handleFloorClick = (floor: number) => {
+    navigate(`/booking/${floor}`);
+  };
+  const navigate = useNavigate();
   const location = useLocation();
   console.log(location.pathname);
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
@@ -69,6 +72,7 @@ function Shell() {
 
   function handleLogout() {
     setCurrentUser(null);
+    navigate("/");
     keycloak.logout();
     setAnchorEl(null);
   }
@@ -84,9 +88,7 @@ function Shell() {
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
-  const handleFloorClick = (floor: number) => {
-    navigate(`/booking/${floor}`);
-  };
+
   const loggedInMenuItems = [
     {
       title: "Home",
@@ -95,13 +97,13 @@ function Shell() {
     },
     {
       title: "Book",
-      url: "/book",
+      url: "/booking/7",
       cName: "nav-links",
     },
 
     {
       title: "My Bookings",
-      url: "/myBookings",
+      url: "/my-bookings",
       cName: "nav-links",
     },
   ];
