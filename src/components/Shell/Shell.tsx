@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   Drawer,
@@ -20,11 +20,18 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  Box,
+  CardMedia,
+  Paper,
 } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
 
 function Shell() {
+  const handleFloorClick = (floor: number) => {
+    navigate(`/booking/${floor}`);
+  };
+  const navigate = useNavigate();
   const location = useLocation();
   console.log(location.pathname);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -65,6 +72,7 @@ function Shell() {
 
   function handleLogout() {
     setCurrentUser(null);
+    navigate("/");
     keycloak.logout();
     setAnchorEl(null);
   }
@@ -89,13 +97,13 @@ function Shell() {
     },
     {
       title: "Book",
-      url: "/book",
+      url: "/booking/7",
       cName: "nav-links",
     },
 
     {
       title: "My Bookings",
-      url: "/myBookings",
+      url: "/my-bookings",
       cName: "nav-links",
     },
   ];
@@ -258,26 +266,68 @@ function Shell() {
               {!keycloak.authenticated ? "Log In" : "Loading"}
             </Button>
           ) : (
-            <Link to={"/book"}>
-              <Button
+            <Box
+              display="flex"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "400px",
+              }}
+            >
+              <Paper
                 sx={{
-                  background: "#f5f0f8",
-                  color: "#7f2c8e",
-                  width: "9em",
-                  p: "4px",
+                  width: "250px",
+                  height: "250px",
+                  backgroundColor: "#f5f0f8",
+                  borderRadius: "0 0 50% 50% / 20% 20% 0 0",
+                  padding: "16px",
                   m: 1,
-                  fontWeight: 650,
-                  fontSize: "1.2em",
+                  cursor: "pointer",
+                  marginRight: "10px",
                   "&:hover": {
+                    transform: "scale(1.1)",
                     transition: "all 0.3s ease-out",
-                    backgroundColor: "#4894c1",
-                    color: "#f5f0f8",
+                    marginRight: "50px",
                   },
                 }}
+                onClick={() => handleFloorClick(7)}
               >
-                {keycloak.authenticated ? "BOOK NOW" : "Loading"}
-              </Button>
-            </Link>
+                <h3>Floor 7</h3>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="../../assets/Office.jpg"
+                />
+                <h4>Available seats: 25/30</h4>
+              </Paper>
+              <Paper
+                sx={{
+                  width: "250px",
+                  height: "250px",
+                  backgroundColor: "#f5f0f8",
+                  borderRadius: "0 0 50% 50% / 20% 20% 0 0",
+                  padding: "16px",
+                  m: 1,
+                  cursor: "pointer",
+                  marginLeft: "10px",
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "all 0.3s ease-out",
+                    marginLeft: "50px",
+                  },
+                }}
+                onClick={() => handleFloorClick(8)}
+              >
+                <h3>Floor 8</h3>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="../../assets/Office.jpg"
+                />
+                <h4>Available seats: 12/50</h4>
+              </Paper>
+            </Box>
           )}
         </div>
       ) : null}
