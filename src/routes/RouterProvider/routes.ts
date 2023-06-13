@@ -1,5 +1,5 @@
 import BookingArea from "../../components/Booking/BookingArea";
-import HomePage from "../../pages/HomePage/HomePage";
+import AdminHome from "../../pages/AdminHome/AdminHome";
 import MyBookings from "../../pages/MyBookings/MyBookings";
 
 export interface RouteConfig {
@@ -16,6 +16,11 @@ export const routes: RouteConfig[] = [
   {
     path: `/my-bookings`,
     component: MyBookings,
+  },
+
+  {
+    path: `/admin-home`,
+    component: AdminHome,
   },
 
   // {

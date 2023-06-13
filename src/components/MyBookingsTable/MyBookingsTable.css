@@ -78,32 +78,27 @@
   color: #f5f0f8;
 }
 
-
-
 @media (max-width: 767px) {
-
   .my-bookings-container {
     padding-left: 20px;
   }
-  
+
   .booking-title {
     width: 100%;
     font-size: 2rem;
   }
-  
+
   .table-design {
     width: 100%;
   }
-  
+
   .table-h,
   .rows,
   .table-design th,
   .table-design td {
     font-size: 18px;
   }
-  .table-design .decision{
+  .table-design .decision {
     padding-bottom: 2rem;
-   
   }
 }
-
