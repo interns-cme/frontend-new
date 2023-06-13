@@ -1,80 +1,83 @@
 .floorContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .floorBox {
-    display: flex;
-    border: solid 1px;
-    background-color: #D5C3B4;
-    padding: 2rem;
-    width: min-content;
-    height: 800px;
-    margin: 2rem;
-  }
-  
-  .columnContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .columnDivider {
-    margin-top: 1rem;
-  }
-  
-  .nestedTableContainer {
-    border: solid 1px;
-    margin-left: 0;
-    padding: 4px;
-    width: min-content;
-  }
-  
-  .seatBox {
-    border: solid 1px;
-    margin-left: 0;
-    width: 120px;
-    height: 100px;
-  }
-  
-  .seatBoxRight {
-    float: right;
-  }
-  
-  .seatBoxLeft {
-    float: left;
-  }
-  
-  .rightColumn {
-    float: right;
-    right: 0;
-    margin-left: 130px;
-  }
-  
-  .roomBox {
-    border: solid 1px;
-    margin-left: 0;
-    width: 120px;
-    height: 100px;
-  }
-  
-  .leftColumnContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .redBackgroundBox {
-    bottom: 0;
-    border: solid 1px;
-    margin-left: 0;
-    width: 600px;
-    height: 600px;
-    background-color: rgba(255, 0, 0, 0.5);
-    background-image: linear-gradient(to bottom right, transparent 50%, rgba(255, 0, 0, 0.3) 50%);
-    overflow: initial;
-    margin: 2rem;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.floorBox {
+  display: flex;
+  border: solid 1px;
+  background-color: #d5c3b4;
+  padding: 2rem;
+  width: min-content;
+  height: 800px;
+  margin: 2rem;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.columnDivider {
+  margin-top: 1rem;
+}
+
+.nestedTableContainer {
+  border: solid 1px;
+  margin-left: 0;
+  padding: 4px;
+  width: min-content;
+}
+
+.seatBox {
+  border: solid 1px;
+  margin-left: 0;
+  width: 120px;
+  height: 100px;
+}
+
+.seatBoxRight {
+  float: right;
+}
+
+.seatBoxLeft {
+  float: left;
+}
+
+.rightColumn {
+  float: right;
+  right: 0;
+  margin-left: 130px;
+}
+
+.roomBox {
+  border: solid 1px;
+  margin-left: 0;
+  width: 120px;
+  height: 100px;
+}
+
+.leftColumnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redBackgroundBox {
+  bottom: 0;
+  border: solid 1px;
+  margin-left: 0;
+  width: 600px;
+  height: 600px;
+  background-color: rgba(255, 0, 0, 0.5);
+  background-image: linear-gradient(
+    to bottom right,
+    transparent 50%,
+    rgba(255, 0, 0, 0.3) 50%
+  );
+  overflow: initial;
+  margin: 2rem;
+}
