@@ -1,4 +1,4 @@
-import BookingArea from "../../components/Booking/BookingArea";
+import BookingArea from "../../pages/BookingArea/BookingArea";
 import NotFound404 from "../../components/NotFound404/NotFound404";
 import HomePage from "../../pages/HomePage/HomePage";
 import pageNotFound from "../../pages/pageNotFound";

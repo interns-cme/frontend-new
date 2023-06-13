@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Box,
   CssBaseline,
   MenuItem,
   Select,
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import Table from "./Table/Table";
-import Seat from "./Seat/Seat";
-import Floor from "./Floor/Floor";
+import Table from "../../components/Booking/Table/Table";
+import Seat from "../../components/Booking/Seat/Seat";
+import Floor from "../../components/Booking/Floor/Floor";
 import { useNavigate, useParams } from "react-router-dom";
+import "./BookingArea.css";
 
 const BookingArea: React.FC = () => {
   const { floor } = useParams();
@@ -19,13 +21,19 @@ const BookingArea: React.FC = () => {
   const handleFloorClick = (floor: string) => {
     navigate(`/booking/${floor}`);
   };
-
+  useEffect(() => {
+    if (floor && (floor === "7" || floor === "8")) {
+      setSelectedFloor(floor);
+    } else {
+      navigate("/404");
+    }
+  }, [floor, navigate]);
   const handleFloorChange = (event: SelectChangeEvent<string>) => {
     setSelectedFloor(event.target.value);
     handleFloorClick(event.target.value);
   };
   return (
-    <>
+    <Box>
       <Typography sx={{ marginTop: "100px" }}>
         <h2>
           Welcome to our CME Office Seat Reservation Website! Reserve your ideal
@@ -41,8 +49,8 @@ const BookingArea: React.FC = () => {
         <MenuItem value="7">Floor 7</MenuItem>
         <MenuItem value="8">Floor 8</MenuItem>
       </Select>
-      <Floor floor_number={floor} />
-    </>
+      {floor ? <Floor floor_number={floor} /> : null}
+    </Box>
   );
 };
 

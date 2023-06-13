@@ -22,16 +22,16 @@ const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
   }, [isTwoSided, seats.length]);
 
   return (
-    <>
+    <Box
+      sx={
+        {
+          // transform: "rotate(90deg)",
+          // transformOrigin: "50% 50%",
+        }
+      }
+    >
       {isTwoSided ? (
-        <Box
-          sx={
-            {
-              //   transform: "rotate(90deg)",
-              //   transformOrigin: "50% 50%",
-            }
-          }
-        >
+        <Box>
           <Box display="flex" sx={{ marginTop: "10px" }}>
             {topHalf}
           </Box>
@@ -45,17 +45,7 @@ const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
           <Box display="flex">{bottomHalf}</Box>
         </Box>
       ) : (
-        <Box
-          sx={
-            {
-              //   transform: "rotate(90deg)",
-              //   transformOrigin: "50% 50%",
-            }
-          }
-        >
-          <Box display="flex" sx={{ marginTop: "10px" }}>
-            {seats}
-          </Box>
+        <Box>
           <Box
             sx={{
               width: `${width}px`,
@@ -63,9 +53,12 @@ const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
               height: "60px",
             }}
           />
+          <Box display="flex" sx={{ marginTop: "10px" }}>
+            {seats}
+          </Box>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

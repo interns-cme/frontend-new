@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   Drawer,
@@ -20,6 +20,9 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  Box,
+  CardMedia,
+  Paper,
 } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
@@ -27,6 +30,7 @@ import axios from "axios";
 function Shell() {
   const location = useLocation();
   console.log(location.pathname);
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
   const api = axios.create({
@@ -80,7 +84,9 @@ function Shell() {
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
-
+  const handleFloorClick = (floor: number) => {
+    navigate(`/booking/${floor}`);
+  };
   const loggedInMenuItems = [
     {
       title: "Home",
@@ -222,13 +228,25 @@ function Shell() {
         </List>
       </Drawer>
       {location.pathname === "/" ? (
-        <div>
+        <div
+          style={
+            {
+              // textAlign: "left",
+              // display: "flex",
+              // flexDirection: "column",
+              // justifyContent: "flex-start",
+            }
+          }
+        >
+          <h1 style={{ color: "#7f2c8e" }}>
+            Welcome to our Office Seat Reservation website!
+          </h1>
           <h2 style={{ color: "#7f2c8e" }}>
-            Welcome to our Office Seat Reservation website! Here, you can easily
-            reserve seats at our company office and enjoy a comfortable and
-            productive work environment. Take control of your seating
-            preferences and secure your spot with just a few clicks. Start
-            reserving your ideal seat today and enhance your office experience!
+            Here, you can easily reserve seats at our company office and enjoy a
+            comfortable and productive work environment. Take control of your
+            seating preferences and secure your spot with just a few clicks.
+            Start reserving your ideal seat today and enhance your office
+            experience!
           </h2>
           {!currentUser && !keycloak.authenticated ? (
             <Button
@@ -245,7 +263,6 @@ function Shell() {
                 outline: "none",
                 border: "none",
                 cursor: "pointer",
-                marginLeft: 0,
                 "&:hover": {
                   transition: "all 0.3s ease-out",
                   backgroundColor: "#4894c1",
@@ -258,26 +275,67 @@ function Shell() {
               {!keycloak.authenticated ? "Log In" : "Loading"}
             </Button>
           ) : (
-            <Link to={"/book"}>
-              <Button
+            <Box
+              display="flex"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                height: "400px",
+              }}
+            >
+              <Paper
                 sx={{
-                  background: "#f5f0f8",
-                  color: "#7f2c8e",
-                  width: "9em",
-                  p: "4px",
+                  width: "250px",
+                  height: "250px",
+                  backgroundColor: "#f5f0f8",
+                  borderRadius: "0 0 50% 50% / 20% 20% 0 0",
+                  padding: "16px",
                   m: 1,
-                  fontWeight: 650,
-                  fontSize: "1.2em",
+                  cursor: "pointer",
+                  marginRight: "30px",
                   "&:hover": {
+                    transform: "scale(1.1)",
                     transition: "all 0.3s ease-out",
-                    backgroundColor: "#4894c1",
-                    color: "#f5f0f8",
                   },
                 }}
+                onClick={() => handleFloorClick(7)}
               >
-                {keycloak.authenticated ? "BOOK NOW" : "Loading"}
-              </Button>
-            </Link>
+                <h3>Floor 7</h3>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="../../assets/Office.jpg"
+                />
+                <h4>Available seats: 25/30</h4>
+              </Paper>
+              <Paper
+                sx={{
+                  width: "250px",
+                  height: "250px",
+                  backgroundColor: "#f5f0f8",
+                  borderRadius: "0 0 50% 50% / 20% 20% 0 0",
+                  padding: "16px",
+                  m: 1,
+                  cursor: "pointer",
+                  marginLeft: "10px",
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    transition: "all 0.3s ease-out",
+                  },
+                }}
+                onClick={() => handleFloorClick(8)}
+              >
+                <h3>Floor 8</h3>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="../../assets/Office.jpg"
+                />
+                <h4>Available seats: 12/50</h4>
+              </Paper>
+            </Box>
           )}
         </div>
       ) : null}
