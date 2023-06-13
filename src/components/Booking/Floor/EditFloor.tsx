@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Divider } from "@mui/material";
-import Table from "../Table/Table";
+import Table from "../Table/EditTable";
 import Seat from "../Seat/Seat";
 import Room from "../Room/Room";
 import { SeatProps } from "../../../models/ISeat.model";

@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import Seat from "../Seat/Seat";
 import { SeatProps } from "../../../models/ISeat.model";
 import { TableProps } from "../../../models/ITable.model";
+import SeatAdmin from "../Seat/SeatAdmin";
 
-const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
+const Table: React.FC<TableProps> = ({ table_id, Seats, isTwoSided }) => {
   // const [seats, setSeats] = useState<SeatProps[]>([]);
   // useEffect(() => {
   //   // Fetch the seats array for the specific table from the backend
@@ -21,7 +22,7 @@ const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
   // }, [table_id]);
 
   const seats: React.ReactElement[] = Seats.map((seat) => (
-    <Seat key={seat.seat_id} status={seat.status} seat_id={seat.seat_id} />
+    <SeatAdmin key={seat.seat_id} status={seat.status} seat_id={seat.seat_id} />
   ));
   const [width, setWidth] = useState((seats.length / 2) * 35);
   const halfIndex = Math.ceil(seats.length / 2);

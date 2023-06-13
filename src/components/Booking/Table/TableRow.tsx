@@ -17,7 +17,7 @@ const TableRow: React.FC<FloorDesignProps> = ({
   const generateEmptyTables = () => {
     const emptyTables = Array.from({ length: rows * columns });
     return emptyTables.map((_, index) => (
-      <Table key={index} Seats={[]} id={index} isTwoSided={true} />
+      <Table key={index} Seats={[]} table_id={"0"} isTwoSided={true} />
     ));
   };
   return (
