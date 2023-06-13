@@ -34,12 +34,10 @@ const BookingArea: React.FC = () => {
   };
   return (
     <Box>
-      <Typography sx={{ marginTop: "100px" }}>
-        <h2>
-          Welcome to our CME Office Seat Reservation Website! Reserve your ideal
-          workspace with ease and convenience.
-        </h2>
-      </Typography>
+      <h2 style={{ color: "#7f2c8e", marginTop: "60px" }}>
+        Welcome to our CME Office Seat Reservation Website! Reserve your ideal
+        workspace with ease and convenience.
+      </h2>
       <CssBaseline />
       <Select
         value={selectedFloor}

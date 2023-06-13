@@ -11,6 +11,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Testimage from "../../assets/BG-Testimage.jpg";
+import Office from "../../assets/Office.jpg";
 
 import {
   Drawer,
@@ -305,11 +307,7 @@ function Shell() {
                 onClick={() => handleFloorClick(7)}
               >
                 <h3>Floor 7</h3>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="../../assets/Office.jpg"
-                />
+                <CardMedia component="img" height="140" image={Testimage} />
                 <h4>Available seats: 25/30</h4>
               </Paper>
               <Paper
@@ -330,11 +328,7 @@ function Shell() {
                 onClick={() => handleFloorClick(8)}
               >
                 <h3>Floor 8</h3>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="../../assets/Office.jpg"
-                />
+                <CardMedia component="img" height="140" image={Office} />
                 <h4>Available seats: 12/50</h4>
               </Paper>
             </Box>

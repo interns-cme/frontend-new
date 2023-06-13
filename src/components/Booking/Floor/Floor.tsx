@@ -165,7 +165,9 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
                   paddingBottom: 0,
                 }}
               >
-                <Table Seats={seats2} id={0} isTwoSided={true} />
+                <Box
+                  sx={{ height: "160px", width: "80px", marginTop: "130px" }}
+                ></Box>
                 <Divider />
                 <Table Seats={seats2} id={0} isTwoSided={true} />
                 <Table Seats={seats2} id={0} isTwoSided={true} />
@@ -210,7 +212,7 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             <Box
               sx={{ display: "flex", flexDirection: "column", height: "100%" }}
             >
-              <Table Seats={seats2} id={0} isTwoSided={true} />
+              <Box sx={{ height: "160px", width: "80px" }}></Box>
               <Divider />
               <Table Seats={seats2} id={0} isTwoSided={true} />
               <Table Seats={seats2} id={0} isTwoSided={true} />
