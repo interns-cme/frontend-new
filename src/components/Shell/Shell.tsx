@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import AdminHome from "../../pages/AdminHome/AdminHome";
 
 import {
   Drawer,
@@ -55,19 +56,22 @@ function Shell() {
 
   const [currentUser, setCurrentUser] = useState<KeyCloakToken | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(
+    keycloak.resourceAccess?.backend?.roles.includes("admin")
+  );
 
   useEffect(() => {
-    console.log(keycloak);
     if (keycloak.authenticated !== false) {
       setCurrentUser({
         idToken: keycloak.idToken,
         refreshToken: keycloak.refreshToken,
         token: keycloak.token,
       });
+      localStorage.setItem("currentUser", "true");
     } else {
       setCurrentUser(null);
     }
-    console.log(currentUser);
+    setIsAdmin(keycloak.resourceAccess?.backend?.roles.includes("admin"));
   }, [keycloak.authenticated]);
 
   function handleLogout() {
@@ -89,7 +93,7 @@ function Shell() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  const loggedInMenuItems = [
+  const userLoggedInMenuItems = [
     {
       title: "Home",
       url: "/",
@@ -104,6 +108,37 @@ function Shell() {
     {
       title: "My Bookings",
       url: "/my-bookings",
+      cName: "nav-links",
+    },
+  ];
+
+  const adminLoggedInMenuItems = [
+    {
+      title: "Home",
+      url: "/",
+      cName: "nav-links",
+    },
+    {
+      title: "Statistics",
+      url: "/admin-statistics",
+      cName: "nav-links",
+    },
+
+    {
+      title: "History",
+      url: "/admin-history",
+      cName: "nav-links",
+    },
+
+    {
+      title: "Reservations",
+      url: "/admin-bookings",
+      cName: "nav-links",
+    },
+
+    {
+      title: "Edit Floor",
+      url: "/admin-floor",
       cName: "nav-links",
     },
   ];
@@ -213,23 +248,39 @@ function Shell() {
       >
         <List>
           {currentUser ? (
-            loggedInMenuItems.map((item, index) => (
-              <ListItem
-                button
-                key={index}
-                component={NavLink}
-                to={item.url}
-                className={item.cName}
-              >
-                <ListItemText primary={item.title} />
-              </ListItem>
-            ))
+            isAdmin ? (
+              adminLoggedInMenuItems.map((item, index) => (
+                <ListItem
+                  button
+                  key={index}
+                  component={NavLink}
+                  to={item.url}
+                  className={item.cName}
+                >
+                  <ListItemText primary={item.title} />
+                </ListItem>
+              ))
+            ) : (
+              userLoggedInMenuItems.map((item, index) => (
+                <ListItem
+                  button
+                  key={index}
+                  component={NavLink}
+                  to={item.url}
+                  className={item.cName}
+                >
+                  <ListItemText primary={item.title} />
+                </ListItem>
+              ))
+            )
           ) : (
             <p></p>
           )}
         </List>
       </Drawer>
-      {location.pathname === "/" ? (
+      {isAdmin && location.pathname === "/" ? (
+        <AdminHome />
+      ) : location.pathname === "/" ? (
         <div
           style={
             {
@@ -274,7 +325,7 @@ function Shell() {
               color="inherit"
               onClick={handleLogin}
             >
-              {!keycloak.authenticated ? "Log In" : "Loading"}
+              {!keycloak.authenticated ? "Log In" : ""}
             </Button>
           ) : (
             <Box

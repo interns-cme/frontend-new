@@ -1,24 +1,27 @@
 import { Box, CardMedia, Container, Paper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Statistics from "../../assets/statistics.jpg";
 import Booking from "../../assets/booking.jpg";
 import FloorMap from "../../assets/floormap.jpg";
 import History from "../../assets/history.png";
 
 function AdminHomePage() {
+  const navigate = useNavigate();
+
   function handleStatisticsClick(): void {
-    throw new Error("Function not implemented.");
+    navigate("/admin-statistics");
   }
 
-  function handleReservationsClick(): void {
-    throw new Error("Function not implemented.");
+  function handleBookingsClick(): void {
+    navigate("/admin-bookings");
   }
 
   function handleEditFloorClick(): void {
-    throw new Error("Function not implemented.");
+    navigate("/admin-floor");
   }
 
   function handleHistoryClick(): void {
-    throw new Error("Function not implemented.");
+    navigate("/admin-history");
   }
 
   return (
@@ -50,7 +53,7 @@ function AdminHomePage() {
               transition: "all 0.3s ease-out",
             },
           }}
-          onClick={() => handleStatisticsClick()}
+          onClick={handleStatisticsClick}
         >
           <Typography variant="h4" sx={{ fontWeight: "800px" }}>
             Statistics
@@ -80,7 +83,7 @@ function AdminHomePage() {
               transition: "all 0.3s ease-out",
             },
           }}
-          onClick={() => handleReservationsClick()}
+          onClick={handleBookingsClick}
         >
           <Typography variant="h4" sx={{ fontWeight: "800px" }}>
             Reservations
@@ -122,7 +125,7 @@ function AdminHomePage() {
               transition: "all 0.3s ease-out",
             },
           }}
-          onClick={() => handleHistoryClick()}
+          onClick={handleHistoryClick}
         >
           <Typography variant="h4" sx={{ fontWeight: "800px" }}>
             History
@@ -152,7 +155,7 @@ function AdminHomePage() {
               transition: "all 0.3s ease-out",
             },
           }}
-          onClick={() => handleEditFloorClick()}
+          onClick={handleEditFloorClick}
         >
           <Typography variant="h4" sx={{ fontWeight: "800px" }}>
             Edit Floor

@@ -1,4 +1,6 @@
 import NotFound404 from "../../components/NotFound404/NotFound404";
+import AdminBookings from "../../pages/AdminBookings/AdminBookings";
+import AdminHistory from "../../pages/AdminHistory/AdminHistory";
 import AdminHome from "../../pages/AdminHome/AdminHome";
 import BookingArea from "../../pages/BookingArea/BookingArea";
 import MyBookings from "../../pages/MyBookings/MyBookings";
@@ -27,23 +29,18 @@ export const userRoutes: RouteConfig[] = [
 
 export const adminRoutes: RouteConfig[] = [
   {
-    path: `/admin-home`,
-    component: AdminHome,
-  },
-
-  {
     path: `/admin-statistics`,
     component: AdminHome,
   },
 
   {
-    path: `/admin-reservations`,
-    component: AdminHome,
+    path: `/admin-bookings`,
+    component: AdminBookings,
   },
 
   {
     path: `/admin-history`,
-    component: AdminHome,
+    component: AdminHistory,
   },
 
   {
