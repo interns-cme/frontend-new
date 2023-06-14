@@ -8,21 +8,21 @@ import History from "../../assets/history.png";
 function AdminHomePage() {
   const navigate = useNavigate();
 
-  function handleStatisticsClick(): void {
+  const handleStatisticsClick = () => {
     navigate("/admin-statistics");
-  }
+  };
 
-  function handleBookingsClick(): void {
+  const handleBookingsClick = () => {
     navigate("/admin-bookings");
-  }
+  };
 
-  function handleEditFloorClick(): void {
+  const handleEditFloorClick = () => {
     navigate("/admin-floor");
-  }
+  };
 
-  function handleHistoryClick(): void {
+  const handleHistoryClick = () => {
     navigate("/admin-history");
-  }
+  };
 
   return (
     <Container>
@@ -31,12 +31,9 @@ function AdminHomePage() {
       </Typography>
       <Box
         display="flex"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "400px",
-        }}
+        justifyContent="center"
+        alignItems="center"
+        height="400px"
       >
         <Paper
           sx={{
@@ -48,14 +45,14 @@ function AdminHomePage() {
             cursor: "pointer",
             marginLeft: "10rem",
             marginRight: "15rem",
+            transition: "transform 0.3s ease-out",
             "&:hover": {
               transform: "scale(1.1)",
-              transition: "all 0.3s ease-out",
             },
           }}
           onClick={handleStatisticsClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: "800px" }}>
+          <Typography variant="h4" sx={{ fontWeight: 800 }}>
             Statistics
           </Typography>
           <CardMedia
@@ -78,14 +75,14 @@ function AdminHomePage() {
             cursor: "pointer",
             marginRight: "15rem",
             backgroundColor: "#fafafa",
+            transition: "transform 0.3s ease-out",
             "&:hover": {
               transform: "scale(1.1)",
-              transition: "all 0.3s ease-out",
             },
           }}
           onClick={handleBookingsClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: "800px" }}>
+          <Typography variant="h4" sx={{ fontWeight: 800 }}>
             Reservations
           </Typography>
           <CardMedia
@@ -102,12 +99,9 @@ function AdminHomePage() {
 
       <Box
         display="flex"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "300px",
-        }}
+        justifyContent="center"
+        alignItems="center"
+        height="300px"
       >
         <Paper
           sx={{
@@ -120,14 +114,14 @@ function AdminHomePage() {
             marginLeft: "10rem",
             marginRight: "15rem",
             backgroundColor: "#fafafa",
+            transition: "transform 0.3s ease-out",
             "&:hover": {
               transform: "scale(1.1)",
-              transition: "all 0.3s ease-out",
             },
           }}
           onClick={handleHistoryClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: "800px" }}>
+          <Typography variant="h4" sx={{ fontWeight: 800 }}>
             History
           </Typography>
           <CardMedia
@@ -150,14 +144,14 @@ function AdminHomePage() {
             cursor: "pointer",
             marginRight: "15rem",
             backgroundColor: "#ffff",
+            transition: "transform 0.3s ease-out",
             "&:hover": {
               transform: "scale(1.1)",
-              transition: "all 0.3s ease-out",
             },
           }}
           onClick={handleEditFloorClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: "800px" }}>
+          <Typography variant="h4" sx={{ fontWeight: 800 }}>
             Edit Floor
           </Typography>
           <CardMedia

@@ -3,46 +3,11 @@ import "./AdminBookingsPage.css";
 
 import AdminBookingsPageReadOnlyRow from "./AdminBookingsPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
-
-interface User {
-  userId: number;
-  userBookings: AdminBooking[];
-}
+import keycloak from "../../utils/keycloak";
+import axios from "axios";
 
 function AdminBookingsPage() {
-  const [currentUser, setCurrentUser] = useState<User>({
-    userId: 0,
-    userBookings: [
-      {
-        user: "Issa Makki",
-        bookingId: 535,
-        floor: 7,
-        seat: 64,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Bahaa Haidar",
-        bookingId: 536,
-        floor: 8,
-        seat: 62,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Hassan Hijjawi",
-        bookingId: 537,
-        floor: 7,
-        seat: 66,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Youry Allam",
-        bookingId: 538,
-        floor: 7,
-        seat: 67,
-        bookingDate: "Monday",
-      },
-    ],
-  });
+  const [userBookings, setUserBookings] = useState<AdminBooking[]>([]);
 
   const [nameFilter, setNameFilter] = useState("");
   const [floorFilter, setFloorFilter] = useState("");
@@ -50,15 +15,10 @@ function AdminBookingsPage() {
   const [filteredBookings, setFilteredBookings] = useState<AdminBooking[]>([]);
 
   const handleUnbook = (bookingId: number) => {
-    //axios.delete()
-
-    const updatedBookings = currentUser.userBookings.filter(
-      (booking) => booking.bookingId !== bookingId
+    const updatedBookings = userBookings.filter(
+      (booking: { bookingId: number }) => booking.bookingId !== bookingId
     );
-    setCurrentUser((prevUser) => ({
-      ...prevUser,
-      userBookings: updatedBookings,
-    }));
+    setUserBookings((prevBookings) => updatedBookings);
   };
 
   const handleUserFilterChange = (
@@ -80,68 +40,85 @@ function AdminBookingsPage() {
   };
 
   useEffect(() => {
-    const filteredBookings = currentUser.userBookings.filter((booking) => {
+    const currentUser = keycloak.token;
+    if (currentUser) {
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${keycloak.token}`;
+    }
+
+    axios
+      .get<AdminBooking[]>(
+        "https://d2a3-193-227-191-93.ngrok-free.app/reservation/all-reservations",
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${keycloak.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setUserBookings(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const filteredBookings = userBookings.filter((booking) => {
       const userMatch = booking.user
         .toLowerCase()
         .includes(nameFilter.toLowerCase());
-      const floorMatch = booking.floor.toString().includes(floorFilter);
-      const seatMatch = booking.seat.toString().includes(seatFilter);
+      const floorMatch = booking.floor_number.toString().includes(floorFilter);
+      const seatMatch = booking.seat_number.toString().includes(seatFilter);
       return userMatch && floorMatch && seatMatch;
     });
 
     setFilteredBookings(filteredBookings);
-  }, [currentUser.userBookings, nameFilter, floorFilter, seatFilter]);
+  }, [userBookings, nameFilter, floorFilter, seatFilter]);
 
   return (
     <div className="my-bookings-container">
-      <h1
-        style={{
-          textAlign: "left",
-          marginBottom: "2rem",
-          borderBottom: "dashed 1px",
-          width: "25%",
-          fontSize: "2.6rem",
-        }}
-      >
-        User Bookings
-      </h1>
+      <h1 className="heading">User Bookings</h1>
 
       <form className="filter-form">
-        <label className="filter-label" htmlFor="nameFilter">
-          User:
-        </label>
-        <input
-          type="text"
-          id="nameFilter"
-          className="filter-input"
-          value={nameFilter}
-          onChange={handleUserFilterChange}
-        />
-        <br />
+        <div className="filter-group">
+          <label className="filter-label" htmlFor="nameFilter">
+            User:
+          </label>
+          <input
+            type="text"
+            id="nameFilter"
+            className="filter-input"
+            value={nameFilter}
+            onChange={handleUserFilterChange}
+          />
+        </div>
 
-        <label className="filter-label" htmlFor="floorFilter">
-          Floor:
-        </label>
-        <input
-          type="text"
-          id="floorFilter"
-          className="filter-input"
-          value={floorFilter}
-          onChange={handleFloorFilterChange}
-        />
-        <br />
+        <div className="filter-group">
+          <label className="filter-label" htmlFor="floorFilter">
+            Floor:
+          </label>
+          <input
+            type="text"
+            id="floorFilter"
+            className="filter-input"
+            value={floorFilter}
+            onChange={handleFloorFilterChange}
+          />
+        </div>
 
-        <label className="filter-label" htmlFor="seatFilter">
-          Seat:
-        </label>
-        <input
-          type="text"
-          id="seatFilter"
-          className="filter-input"
-          value={seatFilter}
-          onChange={handleSeatFilterChange}
-        />
-        <br />
+        <div className="filter-group">
+          <label className="filter-label" htmlFor="seatFilter">
+            Seat:
+          </label>
+          <input
+            type="text"
+            id="seatFilter"
+            className="filter-input"
+            value={seatFilter}
+            onChange={handleSeatFilterChange}
+          />
+        </div>
       </form>
 
       <table className="table-design">

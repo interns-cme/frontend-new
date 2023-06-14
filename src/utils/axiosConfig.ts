@@ -1,17 +1,17 @@
-import axios from "axios";
-import keycloak from "./keycloak";
+// import axios from "axios";
+// import keycloak from "./keycloak";
 
-const axiosInstance = axios.create();
+// const axiosInstance = axios.create();
 
-axiosInstance.interceptors.request.use(async (config) => {
-  await keycloak.updateToken(5);
-  const token = keycloak.token;
+// axiosInstance.interceptors.request.use(async (config) => {
+//   await keycloak.updateToken(5);
+//   const token = keycloak.token;
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
 
-  return config;
-});
+//   return config;
+// });
 
-export default axiosInstance;
+// export default axiosInstance;

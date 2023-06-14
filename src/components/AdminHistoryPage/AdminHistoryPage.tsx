@@ -2,75 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../AdminBookingsPage/AdminBookingsPage.css";
 import AdminHistoryPageReadOnlyRow from "./AdminHistoryPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
-
-interface User {
-  userId: number;
-  userBookings: AdminBooking[];
-}
+import { AdminUser } from "../../models/IAdminUser.model";
+import keycloak from "../../utils/keycloak";
+import axios from "axios";
 
 function AdminHistoryPage() {
-  const [currentUser, setCurrentUser] = useState<User>({
-    userId: 0,
-    userBookings: [
-      {
-        user: "Issa Makki",
-        bookingId: 535,
-        floor: 7,
-        seat: 64,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Bahaa Haidar",
-        bookingId: 536,
-        floor: 8,
-        seat: 62,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Hassan Hijjawi",
-        bookingId: 537,
-        floor: 7,
-        seat: 66,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Youry Allam",
-        bookingId: 538,
-        floor: 7,
-        seat: 67,
-        bookingDate: "Monday",
-      },
-
-      {
-        user: "Issa Makki",
-        bookingId: 535,
-        floor: 7,
-        seat: 64,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Bahaa Haidar",
-        bookingId: 536,
-        floor: 8,
-        seat: 62,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Hassan Hijjawi",
-        bookingId: 537,
-        floor: 7,
-        seat: 66,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Youry Allam",
-        bookingId: 538,
-        floor: 7,
-        seat: 67,
-        bookingDate: "Tuesday",
-      },
-    ],
-  });
+  const [userBookings, setUserBookings] = useState<AdminBooking[]>([]);
 
   const [nameFilter, setNameFilter] = useState("");
   const [floorFilter, setFloorFilter] = useState("");
@@ -103,26 +40,38 @@ function AdminHistoryPage() {
   };
 
   useEffect(() => {
-    const filteredBookings = currentUser.userBookings.filter((booking) => {
+    const currentUser = keycloak.token;
+    if (currentUser) {
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${keycloak.token}`;
+    }
+
+    axios
+      .get<AdminBooking[]>(
+        "https://232c-178-135-120-215.ngrok-free.app/reservation/all-reservations"
+      )
+      .then((response) => {
+        setUserBookings(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const filteredBookings = userBookings.filter((booking) => {
       const userMatch = booking.user
         .toLowerCase()
         .includes(nameFilter.toLowerCase());
-      const floorMatch = booking.floor.toString().includes(floorFilter);
-      const seatMatch = booking.seat.toString().includes(seatFilter);
-      const dateMatch = booking.bookingDate
+      const floorMatch = booking.floor_number.toString().includes(floorFilter);
+      const seatMatch = booking.seat_number.toString().includes(seatFilter);
+      const dateMatch = booking.start_date
         .toLowerCase()
         .includes(dateFilter.toLowerCase());
       return userMatch && floorMatch && seatMatch && dateMatch;
     });
 
     setFilteredBookings(filteredBookings);
-  }, [
-    currentUser.userBookings,
-    nameFilter,
-    floorFilter,
-    seatFilter,
-    dateFilter,
-  ]);
+  }, [userBookings, nameFilter, floorFilter, seatFilter, dateFilter]);
 
   return (
     <div className="my-bookings-container">

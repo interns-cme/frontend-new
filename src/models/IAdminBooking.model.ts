@@ -1,7 +1,7 @@
 export interface AdminBooking {
   user: string;
   bookingId: number;
-  floor: number;
-  seat: number;
-  bookingDate: string;
+  floor_number: number;
+  seat_number: number;
+  start_date: string;
 }

@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import "./ProfileCard.css";
 import axios from "axios";
-
-interface User {
-  name: string;
-  username: string;
-  email: string;
-}
+import { Profile } from "../../models/IProfileCard.model";
 
 function ProfileCard() {
-  const [currentUser, setCurrentUser] = useState<User>({
+  const [currentUser, setCurrentUser] = useState<Profile>({
     name: "Issa Makki",
     username: "issa.makki",
     email: "issa.makki@cmeoffshore.com",

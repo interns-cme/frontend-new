@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import React from "react";
 import "./AdminBookingsPage.css";
 import { AdminBooking } from "../../models/IAdminBooking.model";
 

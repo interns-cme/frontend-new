@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AdminHome from "../../pages/AdminHome/AdminHome";
 
 import {
@@ -67,7 +67,6 @@ function Shell() {
         refreshToken: keycloak.refreshToken,
         token: keycloak.token,
       });
-      localStorage.setItem("currentUser", "true");
     } else {
       setCurrentUser(null);
     }
