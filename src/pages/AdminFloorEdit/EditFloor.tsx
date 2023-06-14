@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Divider } from "@mui/material";
-import Table from "../Table/EditTable";
-import Seat from "../Seat/Seat";
-import Room from "../Room/Room";
-import { SeatProps } from "../../../models/ISeat.model";
-import { FloorProps } from "../../../models/IFloor.model";
+import Table from "../../components/Booking/Table/TableTest";
+import Seat from "../../components/Booking/Seat/Seat";
+import Room from "../../components/Booking/Room/Room";
+import { SeatProps } from "../../models/ISeat.model";
+import { FloorProps } from "../../models/IFloor.model";
 import { useNavigate } from "react-router-dom";
-import SeatAdmin from "../Seat/SeatAdmin";
+import SeatAdmin from "../../components/Booking/Seat/SeatAdmin";
 
 const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   const seats: SeatProps[] = [

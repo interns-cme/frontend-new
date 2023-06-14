@@ -4,6 +4,7 @@
   gap: 10px;
   margin: 3% 0% 4% 0%;
   padding-left: 50px;
+  width: 100%;
 }
 
 .booking-title {
@@ -76,6 +77,29 @@
   transition: all 0.3s ease-out;
   background-color: #4894c1;
   color: #f5f0f8;
+}
+
+.filter-form {
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+.filter-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 3rem;
+}
+
+.filter-input:focus {
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.filter-label {
+  margin-right: 1.2rem;
+  margin-top: 0.2rem;
+  margin-left: 0.1rem;
 }
 
 @media (max-width: 767px) {

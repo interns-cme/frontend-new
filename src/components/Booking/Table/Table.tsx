@@ -4,7 +4,7 @@ import Seat from "../Seat/Seat";
 import { SeatProps } from "../../../models/ISeat.model";
 import { TableProps } from "../../../models/ITable.model";
 
-const Table: React.FC<TableProps> = ({ Seats, isTwoSided }) => {
+const Table: React.FC<TableProps> = ({ table_id, Seats, isTwoSided }) => {
   // const [seats, setSeats] = useState<SeatProps[]>([]);
   // useEffect(() => {
   //   // Fetch the seats array for the specific table from the backend

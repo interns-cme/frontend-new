@@ -41,6 +41,8 @@ const Seat: React.FC<SeatProps> = ({ status }) => {
   return (
     <Box sx={{ position: "relative" }}>
       <Box
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
         sx={{
           backgroundColor: reserved ? "red" : "green",
           width: "20px",
@@ -50,21 +52,25 @@ const Seat: React.FC<SeatProps> = ({ status }) => {
           cursor: "pointer",
         }}
         onClick={handlePopoverOpen}
+        // onMouseLeave={handlePopoverClose}
       ></Box>
       <Popover
+        // sx={{ pointerEvents: "none" }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "top",
+          vertical: "center",
           horizontal: "center",
         }}
         transformOrigin={{
           vertical: "bottom",
           horizontal: "center",
         }}
-        onMouseLeave={handlePopoverClose}
+        // onMouseEnter={handlePopoverOpen}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
       >
-        <Box sx={{ p: 2 }} onMouseLeave={handlePopoverClose}>
+        <Box sx={{ p: 2 }}>
           {reserved ? (
             <>
               <Typography>Reserved by: Admin</Typography>
