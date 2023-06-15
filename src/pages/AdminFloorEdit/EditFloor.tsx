@@ -33,14 +33,13 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   //   navigate("/404");
   // }
   return (
-    <Box sx={{ margin: "0 auto" }}>
+    <Box>
       {floor_number === "7" ? (
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
           }}
         >
           <Box
@@ -125,7 +124,10 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            top: 0,
+            // height: "100vh",
+            marginBottom: "auto",
+            paddingTop: 0,
           }}
         >
           <Box
@@ -138,6 +140,7 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
               height: "750px",
               m: 2,
               paddingBottom: 0,
+              transform: "scale(0.55, 0.75)",
             }}
           >
             <Box sx={{ display: "flex" }}>

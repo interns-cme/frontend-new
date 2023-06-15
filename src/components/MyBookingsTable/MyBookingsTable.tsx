@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyBookingsReadOnlyRow from "./MyBookingsReadOnlyRow";
 import { Booking } from "../../models/IBooking.model";
+import axiosInstance from "../../utils/axiosConfig";
 
 interface User {
   userId: number;
@@ -24,7 +25,16 @@ function MyBookingsTable() {
     // axios.delete();
     console.log("Unbooking", bookingId);
   };
-
+  useEffect(() => {
+    axiosInstance
+      .get("/building/all-buildings")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className="my-bookings-container">
       <h1 className="booking-title">Your Bookings</h1>

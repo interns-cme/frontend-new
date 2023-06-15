@@ -17,10 +17,10 @@ const AdminBookingsPageReadOnlyRow: React.FC<Props> = ({
 
   return (
     <tr>
-      <td className="rows">{booking.user}</td>
+      <td className="rows">{booking.user_id}</td>
       <td className="rows">{booking.bookingId}</td>
-      <td className="rows">{booking.floor}</td>
-      <td className="rows">{booking.seat}</td>
+      <td className="rows">{booking.floor_number}</td>
+      <td className="rows">{booking.seat_number}</td>
       <td className="rows">{booking.bookingDate}</td>
       <td>
         <button className="unbook-button" onClick={handleUnbook}>

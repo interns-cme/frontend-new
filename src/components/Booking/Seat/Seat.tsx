@@ -1,27 +1,58 @@
 import { Alert, Box, Button, Snackbar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SeatProps } from "../../../models/ISeat.model";
 
-const Seat: React.FC<SeatProps> = ({ status }) => {
-  const [reserved, setstatus] = useState(status);
+const Seat: React.FC<SeatProps> = ({ status, seat_id }) => {
+  const [reserved, setReserved] = useState(status);
   const [showSnackbar, setShowSnackbar] = useState(false);
-
+  const [userReserved, setUserReserved] = useState(false);
   const handleClick = () => {
-    if (reserved === true) window.alert("Seat already reserved");
-    else {
-      setstatus(!reserved);
-      setShowSnackbar(true);
+    const hasBooked = localStorage.getItem("hasBooked");
+    if (reserved) {
+      window.alert("Seat Already Reserved.");
+    } else if (hasBooked !== "true" && !userReserved) {
+      window.alert("Already Reserved a Seat for Today.");
+    } else {
+      if (userReserved) {
+        // Seat is already reserved, unreserve it
+        setUserReserved(false);
+        localStorage.setItem("hasBooked", JSON.stringify(true));
+      } else {
+        // Seat is not reserved, reserve it
+        localStorage.setItem("hasBooked", JSON.stringify({ seat_id }));
+        setUserReserved(true);
+        setShowSnackbar(true);
+      }
     }
+    console.log(hasBooked);
   };
+
   const handleUndo = () => {
     setShowSnackbar(false);
-    setstatus(false);
+    setUserReserved(false);
+    localStorage.setItem("hasBooked", JSON.stringify(true));
   };
+
+  let seatColor = "green"; // Default color for unreserved seats
+
+  useEffect(() => {
+    const hasBooked = localStorage.getItem("hasBooked");
+    if (hasBooked === JSON.stringify({ seat_id })) {
+      setUserReserved(true);
+    }
+  }, []);
+
+  if (reserved) {
+    seatColor = "red"; // Color for reserved seats
+  } else if (userReserved) {
+    seatColor = "blue"; // Color for seats reserved by the user
+  }
+
   return (
     <Box>
       <Box
         sx={{
-          backgroundColor: reserved ? "red" : "green",
+          backgroundColor: seatColor, // Use dynamic seat color
           width: "20px",
           height: "20px",
           m: 1,
@@ -40,7 +71,9 @@ const Seat: React.FC<SeatProps> = ({ status }) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Seat reserved successfully!
+          {reserved
+            ? "Seat reserved successfully!"
+            : "Seat unreserved successfully!"}
           <Button color="inherit" size="small" onClick={handleUndo}>
             Undo
           </Button>

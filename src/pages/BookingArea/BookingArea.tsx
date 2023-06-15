@@ -33,7 +33,14 @@ const BookingArea: React.FC = () => {
     handleFloorClick(event.target.value);
   };
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <h2 style={{ color: "#7f2c8e", marginTop: "60px" }}>
         Welcome to our CME Office Seat Reservation Website! Reserve your ideal
         workspace with ease and convenience.
@@ -42,7 +49,14 @@ const BookingArea: React.FC = () => {
       <Select
         value={selectedFloor}
         onChange={handleFloorChange}
-        sx={{ width: "200px", m: 1 }}
+        sx={{
+          width: "200px",
+          m: 1,
+          p: 0,
+          display: "inline-block",
+          textAlign: "center",
+        }}
+        className="select"
       >
         <MenuItem value="7">Floor 7</MenuItem>
         <MenuItem value="8">Floor 8</MenuItem>

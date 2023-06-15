@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./AdminBookingsPage.css";
 
-import AdminBookingsPageReadOnlyRow from "./AdminBookingsPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
+import AdminBookingsPageReadOnlyRow from "./AdminBookingsPageReadOnlyRow";
 
 interface User {
   userId: number;
@@ -14,31 +14,31 @@ function AdminBookingsPage() {
     userId: 0,
     userBookings: [
       {
-        user: "Issa Makki",
+        user_id: "Issa Makki",
         bookingId: 535,
-        floor: 7,
-        seat: 64,
+        floor_number: 7,
+        seat_number: 64,
         bookingDate: "Monday",
       },
       {
-        user: "Bahaa Haidar",
+        user_id: "Bahaa Haidar",
         bookingId: 536,
-        floor: 8,
-        seat: 62,
+        floor_number: 8,
+        seat_number: 62,
         bookingDate: "Monday",
       },
       {
-        user: "Hassan Hijjawi",
+        user_id: "Hassan Hijjawi",
         bookingId: 537,
-        floor: 7,
-        seat: 66,
+        floor_number: 7,
+        seat_number: 66,
         bookingDate: "Monday",
       },
       {
-        user: "Youry Allam",
+        user_id: "Youry Allam",
         bookingId: 538,
-        floor: 7,
-        seat: 67,
+        floor_number: 7,
+        seat_number: 67,
         bookingDate: "Monday",
       },
     ],
@@ -81,11 +81,11 @@ function AdminBookingsPage() {
 
   useEffect(() => {
     const filteredBookings = currentUser.userBookings.filter((booking) => {
-      const userMatch = booking.user
+      const userMatch = booking.user_id
         .toLowerCase()
         .includes(nameFilter.toLowerCase());
-      const floorMatch = booking.floor.toString().includes(floorFilter);
-      const seatMatch = booking.seat.toString().includes(seatFilter);
+      const floorMatch = booking.floor_number.toString().includes(floorFilter);
+      const seatMatch = booking.seat_number.toString().includes(seatFilter);
       return userMatch && floorMatch && seatMatch;
     });
 

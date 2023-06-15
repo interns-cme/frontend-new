@@ -1,4 +1,4 @@
-import AdminBookingsPage from "../../components/AdminBookingsPage/AdminBookingsPage";
+import AdminBookingsPage from "../../components/adminBookingsPage/AdminBookingsPage";
 
 function AdminBookings() {
   return (

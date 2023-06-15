@@ -1,45 +1,165 @@
-// import { Box, Paper, Typography } from "@mui/material";
 // import React, { useEffect, useState } from "react";
+// import { Box, Paper, Typography } from "@mui/material";
 // import axios from "axios";
+// import ReservationChart from "../../components/Statistics/ReservationChart";
 
 // const Statistics: React.FC = () => {
-//   const [statisticsData, setStatisticsData] = useState<any>(null);
+//   const [reservationCount, setReservationCount] = useState(0);
+//   const [mostReservedSeat, setMostReservedSeat] = useState("");
+//   const [floorWithMostReservations, setFloorWithMostReservations] = useState("");
+//   const [leastReservedSeat, setLeastReservedSeat] = useState("");
+//   const [leastFrequentDay, setLeastFrequentDay] = useState("");
+//   const [mostFrequentDay, setMostFrequentDay] = useState("");
 
 //   useEffect(() => {
-//     const fetchStatisticsData = async () => {
-//       try {
-//         const response = await axios.get("/api/statistics");
-//         setStatisticsData(response.data);
-//       } catch (error) {
-//         console.error("Error fetching statistics data:", error);
-//       }
-//     };
+//     // Fetch reservation count
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setReservationCount(response.data.count);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching reservation count:", error);
+//       });
 
-//     fetchStatisticsData();
+//     // Fetch most reserved seat
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setMostReservedSeat(response.data.seat);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching most reserved seat:", error);
+//       });
+
+//     // Fetch floor with most reservations
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setFloorWithMostReservations(response.data.floor);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching floor with most reservations:", error);
+//       });
+
+//     // Fetch least reserved seat
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setLeastReservedSeat(response.data.seat);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching least reserved seat:", error);
+//       });
+
+//     // Fetch least frequent day
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setLeastFrequentDay(response.data.day);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching least frequent day:", error);
+//       });
+
+//     // Fetch most frequent day
+//     axios
+//       .get("API_ENDPOINT_URL")
+//       .then((response) => {
+//         setMostFrequentDay(response.data.day);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching most frequent day:", error);
+//       });
 //   }, []);
+
+//   const chartData = {
+//     // Chart data remains the same
+//   };
+
+//   const chartData2 = {
+//     // Chart data remains the same
+//   };
 
 //   return (
 //     <Box>
-//       <Typography variant="h4" gutterBottom>
+//       <h1
+//         style={{
+//           marginBottom: "2rem",
+//           textDecoration: "underline dotted",
+//           fontSize: "2.6rem",
+//         }}
+//       >
 //         Statistics
-//       </Typography>
+//       </h1>
 
-//       {statisticsData ? (
-//         <Box display="flex" flexWrap="wrap">
-//           {Object.entries(statisticsData).map(([statName, statValue]) => (
-//             <Box key={statName} width="50%" mb={2}>
-//               <Paper elevation={3} sx={{ p: 2 }}>
-//                 <Typography variant="h6" gutterBottom>
-//                   {statName}
-//                 </Typography>
-//                 <Typography variant="body1">{statValue}</Typography>
-//               </Paper>
-//             </Box>
-//           ))}
+//       <Box display="flex" flexWrap="wrap">
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Number of Reservations
+//             </Typography>
+//             <Typography variant="body1">{reservationCount}</Typography>
+//           </Paper>
 //         </Box>
-//       ) : (
-//         <Typography variant="body1">Loading statistics...</Typography>
-//       )}
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Most Reserved Seat
+//             </Typography>
+//             <Typography variant="body1">{mostReservedSeat}</Typography>
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Floor with Most Reservations
+//             </Typography>
+//             <Typography variant="body1">{floorWithMostReservations}</Typography>
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Least Reserved Seat
+//             </Typography>
+//             <Typography variant="body1">{leastReservedSeat}</Typography>
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Least Frequent Day
+//             </Typography>
+//             <Typography variant="body1">{leastFrequentDay}</Typography>
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Most Frequent Day
+//             </Typography>
+//             <Typography variant="body1">{mostFrequentDay}</Typography>
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Reservations per day
+//             </Typography>
+//             <ReservationChart chartData={chartData} />
+//           </Paper>
+//         </Box>
+//         <Box width="50%" mb={2}>
+//           <Paper elevation={3} sx={{ p: 2 }}>
+//             <Typography variant="h6" gutterBottom>
+//               Reservations per Floor
+//             </Typography>
+//             <ReservationChart chartData={chartData2} />
+//           </Paper>
+//         </Box>
+//         {/* Add more static cards as needed */}
+//       </Box>
 //     </Box>
 //   );
 // };
@@ -47,8 +167,10 @@
 // export default Statistics;
 
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReservationChart from "../../components/Statistics/ReservationChart";
+import axiosInstance from "../../utils/axiosConfig";
+import { getReservations } from "../../services/statistics";
 
 const Statistics: React.FC = () => {
   const chartData = {
@@ -83,6 +205,79 @@ const Statistics: React.FC = () => {
       },
     ],
   };
+  const [reservations, setReservations] = useState(500);
+  const [leastReservedDay, setLeastReserved] = useState("Friday");
+  const [mostReservedDay, setMostReserved] = useState("Monday");
+  const [leastReservedSeat, setLeastReservedSeat] = useState("B4");
+  const [mostReservedSeat, setMostReservedSeat] = useState("A1");
+  const [mostReservedFloor, setMostReservedFloor] = useState("Floor 8");
+  const [reservationsPerDay, setReservationsPerDay] = useState(chartData);
+  const [reservationsPerFloor, setReservationsPerFloor] = useState(chartData2);
+
+  useEffect(() => {
+    getReservations()
+      .then((response) => {
+        setReservations(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/statistics/day-with-least-reservations")
+      .then((response) => {
+        console.log(response);
+        setLeastReserved(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/statistics/day-with-most-reservations")
+      .then((response) => {
+        console.log(response);
+        setMostReserved(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/statistics/floor-with-most-reservations")
+      .then((response) => {
+        console.log(response);
+        setMostReservedFloor(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/statistics/seat-with-least-reservations")
+      .then((response) => {
+        console.log(response);
+        setLeastReservedSeat(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    axiosInstance
+      .get("/statistics/seat-with-most-reservations")
+      .then((response) => {
+        console.log(response);
+        setMostReservedSeat(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <Box>
       <h1
@@ -101,7 +296,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Number of Reservations
             </Typography>
-            <Typography variant="body1">500</Typography>
+            <Typography variant="body1">{reservations}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -109,7 +304,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Most Reserved Seat
             </Typography>
-            <Typography variant="body1">A1</Typography>
+            <Typography variant="body1">{mostReservedSeat}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -117,7 +312,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Floor with Most Reservations
             </Typography>
-            <Typography variant="body1">Floor 3</Typography>
+            <Typography variant="body1">{mostReservedFloor}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -125,7 +320,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Least Reserved Seat
             </Typography>
-            <Typography variant="body1">B4</Typography>
+            <Typography variant="body1">{leastReservedSeat}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -133,7 +328,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Least Frequent Day
             </Typography>
-            <Typography variant="body1">Saturday</Typography>
+            <Typography variant="body1">{leastReservedDay}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -141,7 +336,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Most Frequent Day
             </Typography>
-            <Typography variant="body1">Wednesday</Typography>
+            <Typography variant="body1">{mostReservedDay}</Typography>
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -149,7 +344,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Reservations per day
             </Typography>
-            <ReservationChart chartData={chartData} />
+            <ReservationChart chartData={reservationsPerDay} />
           </Paper>
         </Box>
         <Box width="50%" mb={2}>
@@ -157,7 +352,7 @@ const Statistics: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               Reservations per Floor
             </Typography>
-            <ReservationChart chartData={chartData2} />
+            <ReservationChart chartData={reservationsPerFloor} />
           </Paper>
         </Box>
         {/* Add more static cards as needed */}

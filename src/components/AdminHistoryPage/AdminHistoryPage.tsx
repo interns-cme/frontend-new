@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../AdminBookingsPage/AdminBookingsPage.css";
+import "../adminBookingsPage/AdminBookingsPage.css";
 import AdminHistoryPageReadOnlyRow from "./AdminHistoryPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
 

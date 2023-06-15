@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import "../AdminBookingsPage/AdminBookingsPage.css";
+import "../adminBookingsPage/AdminBookingsPage.css";
 import { AdminBooking } from "../../models/IAdminBooking.model";
 
 interface Props {

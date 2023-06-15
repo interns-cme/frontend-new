@@ -30,7 +30,14 @@ function AdminFloorEdit() {
     handleFloorClick(event.target.value);
   };
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <h1
         style={{
           marginBottom: "2rem",
@@ -44,7 +51,13 @@ function AdminFloorEdit() {
       <Select
         value={selectedFloor}
         onChange={handleFloorChange}
-        sx={{ width: "200px", m: 1 }}
+        sx={{
+          width: "200px",
+          m: 1,
+          p: 0,
+          display: "inline-block",
+          textAlign: "center",
+        }}
       >
         <MenuItem value="7">Floor 7</MenuItem>
         <MenuItem value="8">Floor 8</MenuItem>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider } from "@mui/material";
+import { Box, Container, Divider } from "@mui/material";
 import Table from "../Table/Table";
 import Seat from "../Seat/Seat";
 import Room from "../Room/Room";
@@ -33,14 +33,13 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
   //   navigate("/404");
   // }
   return (
-    <Box sx={{ margin: "0 auto" }}>
+    <Box>
       {floor_number === "7" ? (
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
           }}
         >
           <Box
@@ -49,13 +48,17 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
               border: "solid 1px",
               backgroundColor: "#D5C3B4",
               p: 2,
-              width: "min-content",
+              width: "fit-content(25%)",
               height: "800px",
               m: 2,
             }}
           >
             <Box
-              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+              }}
             >
               <Table Seats={seats} table_id={"0"} isTwoSided={true} />
               <Divider />
@@ -125,7 +128,6 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
           }}
         >
           <Box
@@ -134,10 +136,11 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
               border: "solid 1px",
               backgroundColor: "#D5C3B4",
               p: 2,
-              width: "min-content",
+              width: "fit-content(25%)",
               height: "750px",
               m: 2,
               paddingBottom: 0,
+              transform: "scale(0.55, 0.75)",
             }}
           >
             <Box sx={{ display: "flex" }}>
@@ -168,7 +171,11 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
                 }}
               >
                 <Box
-                  sx={{ height: "160px", width: "80px", marginTop: "130px" }}
+                  sx={{
+                    height: "160px",
+                    width: "80px",
+                    marginTop: "130px",
+                  }}
                 ></Box>
                 <Divider />
                 <Table Seats={seats2} table_id={"0"} isTwoSided={true} />
@@ -212,7 +219,11 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
               ></Box>
             </Box>
             <Box
-              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+              }}
             >
               <Box sx={{ height: "160px", width: "80px" }}></Box>
               <Divider />
