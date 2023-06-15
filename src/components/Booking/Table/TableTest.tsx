@@ -6,21 +6,6 @@ import { TableProps } from "../../../models/ITable.model";
 import SeatAdmin from "../Seat/SeatAdmin";
 
 const Table: React.FC<TableProps> = ({ table_id, Seats, isTwoSided }) => {
-  // const [seats, setSeats] = useState<SeatProps[]>([]);
-  // useEffect(() => {
-  //   // Fetch the seats array for the specific table from the backend
-  //   const fetchSeats = async () => {
-  //     try {
-  //       const response = await axios.get(`/api/tables/${table_id}/seats`); // Replace the endpoint with the actual one that fetches seats for the table
-  //       setSeats(response.data.seats);
-  //     } catch (error) {
-  //       console.log("Error fetching seats:", error);
-  //     }
-  //   };
-
-  //   fetchSeats();
-  // }, [table_id]);
-
   const seats: React.ReactElement[] = Seats.map((seat) => (
     <SeatAdmin key={seat.seat_id} status={seat.status} seat_id={seat.seat_id} />
   ));
@@ -38,14 +23,7 @@ const Table: React.FC<TableProps> = ({ table_id, Seats, isTwoSided }) => {
   }, [isTwoSided, seats.length]);
 
   return (
-    <Box
-      sx={
-        {
-          // transform: "rotate(90deg)",
-          // transformOrigin: "50% 50%",
-        }
-      }
-    >
+    <Box>
       {isTwoSided ? (
         <Box>
           <Box display="flex" sx={{ marginTop: "10px" }}>

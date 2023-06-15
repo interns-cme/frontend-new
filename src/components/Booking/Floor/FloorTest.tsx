@@ -81,7 +81,6 @@ const Floor: React.FC<FloorProps> = ({ floor_number }) => {
               paddingBottom: 0,
             }}
           >
-            {/* Render the Table components based on the tables array */}
             {tables.map((tableId) => (
               <Table
                 key={tableId}
