@@ -24,29 +24,11 @@ function MyBookingsTable() {
   ];
 
   useEffect(() => {
-    // axiosInstance
-    //   .get<Booking[]>("/user-reservations")
-    //   .then((response) => {
-    //     setUserBookings(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // bookingService.getBookings().t;
+    //Backend Integration
   }, []);
 
   const handleUnbook = (bookingId: number) => {
-    // axiosInstance
-    //   .delete(`/user-reservations/${bookingId}`)
-    //   .then(() => {
-    //     console.log("Booking successfully deleted");
-    //     setUserBookings((prevBookings) =>
-    //       prevBookings.filter((booking) => booking.bookingId !== bookingId)
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    //Backend Integration
   };
 
   return (

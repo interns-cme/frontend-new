@@ -68,14 +68,7 @@ function AdminHistoryPage() {
   };
 
   useEffect(() => {
-    axiosInstance
-      .get<AdminBooking[]>("/reservation/all-reservations")
-      .then((response) => {
-        setUserBookings(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //Backend Integration
   }, []);
 
   useEffect(() => {

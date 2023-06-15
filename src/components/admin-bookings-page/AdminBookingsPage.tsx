@@ -43,17 +43,7 @@ function AdminBookingsPage() {
   const [filteredBookings, setFilteredBookings] = useState<AdminBooking[]>([]);
 
   const handleUnbook = (booking_id: number) => {
-    // axiosInstance
-    //   .delete(`/reservation/all-reservations/${bookingId}`)
-    //   .then(() => {
-    //     console.log("Booking successfully deleted");
-    //     setUserBookings((prevBookings) =>
-    //       prevBookings.filter((booking) => booking.bookingId !== bookingId)
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    //Backend Integration
   };
 
   const handleUserFilterChange = (
@@ -75,14 +65,7 @@ function AdminBookingsPage() {
   };
 
   useEffect(() => {
-    axiosInstance
-      .get<AdminBooking[]>("/building/all-buildings")
-      .then((response) => {
-        setUserBookings(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //Backend Integration
 
     const filteredBookings = userBookings.filter((booking) => {
       const userMatch = booking.user_id
