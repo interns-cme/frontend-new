@@ -1,26 +1,47 @@
-import { Route, Routes } from "react-router-dom";
-import Shell from "../../components/Shell/Shell";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import Shell from "../../components/shell/Shell";
 import { userRoutes, adminRoutes } from "./routes";
 import { useKeycloak } from "@react-keycloak-fork/web";
-import NotFound404 from "../../components/NotFound404/NotFound404";
+import NotFound404 from "../../components/not-found-404/NotFound404";
 import { useEffect, useState } from "react";
-import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import LoadingScreen from "../../components/loading-screen/LoadingScreen";
 import Container from "@mui/material/Container";
 
 function RouterProvider() {
-  const { keycloak } = useKeycloak();
+  const { keycloak, initialized } = useKeycloak();
   const [loading, setLoading] = useState(true);
   const isAdmin = keycloak.resourceAccess?.backend?.roles.includes("admin");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setLoading(false);
-    };
-    checkAuthentication();
-  }, []);
+    if (initialized && !loading && !keycloak.authenticated) {
+      const isUserRoute = userRoutes.some(
+        (route) => route.path === location.pathname
+      );
+      const isAdminRoute = adminRoutes.some(
+        (route) => route.path === location.pathname
+      );
 
-  if (loading) {
+      if (isUserRoute || isAdminRoute) {
+        keycloak.login();
+      }
+    }
+  }, [
+    keycloak.authenticated,
+    location.pathname,
+    navigate,
+    initialized,
+    loading,
+  ]);
+
+  useEffect(() => {
+    if (initialized) {
+      setLoading(false);
+    }
+  }, [initialized]);
+
+  if (!initialized || loading) {
     return <LoadingScreen />;
   }
 

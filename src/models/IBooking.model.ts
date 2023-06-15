@@ -1,6 +1,6 @@
 export interface Booking {
-  bookingId: number;
-  floor: number;
-  seat: number;
-  bookingDate: string;
+  booking_id: number;
+  floor_number: number;
+  seat_number: number;
+  start_date: string;
 }

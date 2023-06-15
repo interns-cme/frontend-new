@@ -1,9 +1,10 @@
-import NotFound404 from "../../components/NotFound404/NotFound404";
-import AdminBookings from "../../pages/AdminBookings/AdminBookings";
-import AdminHistory from "../../pages/AdminHistory/AdminHistory";
-import AdminHome from "../../pages/AdminHome/AdminHome";
-import BookingArea from "../../pages/BookingArea/BookingArea";
-import MyBookings from "../../pages/MyBookings/MyBookings";
+import NotFound404 from "../../components/not-found-404/NotFound404";
+import Shell from "../../components/shell/Shell";
+import AdminBookings from "../../pages/admin-bookings/AdminBookings";
+import AdminHistory from "../../pages/admin-history/AdminHistory";
+import AdminHome from "../../pages/admin-home/AdminHome";
+import BookingArea from "../../pages/booking-area/BookingArea";
+import MyBookings from "../../pages/my-bookings/MyBookings";
 
 export interface RouteConfig {
   path: string;
@@ -46,5 +47,9 @@ export const adminRoutes: RouteConfig[] = [
   {
     path: `/admin-floor`,
     component: AdminHome,
+  },
+  {
+    path: `/404`,
+    component: NotFound404,
   },
 ];

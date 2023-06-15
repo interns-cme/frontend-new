@@ -1,4 +1,4 @@
-import AdminHomePage from "../../components/AdminHomePage/AdminHomePage";
+import AdminHomePage from "../../components/admin-home-page/AdminHomePage";
 
 function AdminHome() {
   return (

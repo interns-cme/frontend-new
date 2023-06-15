@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./ProfileCard.css";
-import axios from "axios";
 import { Profile } from "../../models/IProfileCard.model";
 
 function ProfileCard() {
