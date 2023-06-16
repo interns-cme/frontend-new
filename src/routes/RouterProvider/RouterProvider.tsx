@@ -15,6 +15,7 @@ function RouterProvider() {
   const location = useLocation();
 
   useEffect(() => {
+    console.log(keycloak);
     if (initialized && !loading && !keycloak.authenticated) {
       const isUserRoute = userRoutes.some(
         (route) => route.path === location.pathname

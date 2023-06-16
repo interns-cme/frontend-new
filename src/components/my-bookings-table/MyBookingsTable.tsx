@@ -9,26 +9,37 @@ import {
   Button,
 } from "@mui/material";
 import MyBookingsReadOnlyRow from "./MyBookingsReadOnlyRow";
-import axios from "axios";
-import keycloak from "../../utils/keycloak";
 import { Booking } from "../../models/IBooking.model";
-import axiosInstance from "../../utils/axiosConfig";
-// import { bookingService } from "../../services/bookingService";
+import { bookingService } from "../../services/bookingService";
 
 function MyBookingsTable() {
-  // const [userBookings, setUserBookings] = useState<Booking[]>([]);
-  const userBookings = [
-    { booking_id: 1, floor_number: 5, seat_number: 4, start_date: "Tuesday" },
-    { booking_id: 2, floor_number: 5, seat_number: 4, start_date: "Monday" },
-    { booking_id: 3, floor_number: 5, seat_number: 4, start_date: "Wednesday" },
-  ];
+  const [userBookings, setUserBookings] = useState<Booking[]>([]);
 
   useEffect(() => {
-    //Backend Integration
+    bookingService
+      .getBookings()
+      .then((response) => {
+        console.log(response.data);
+        const bookings: Booking[] = response.data;
+        console.log("Received bookings:", bookings);
+      })
+      .catch((error) => {
+        console.error("Error fetching bookings:", error);
+      });
   }, []);
 
-  const handleUnbook = (bookingId: number) => {
-    //Backend Integration
+  const handleUnbook = (booking_id: string) => {
+    bookingService
+      .deleteBooking(booking_id)
+      .then(() => {
+        console.log("Booking successfully deleted");
+        setUserBookings((prevBookings) =>
+          prevBookings.filter((booking) => booking.booking_id !== booking_id)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

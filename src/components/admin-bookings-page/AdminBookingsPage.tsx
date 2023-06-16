@@ -10,41 +10,15 @@ import {
 } from "@mui/material";
 import AdminBookingsPageReadOnlyRow from "./AdminBookingsPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
-import axiosInstance from "../../utils/axiosConfig";
+import { bookingService } from "../../services/bookingService";
 
 function AdminBookingsPage() {
-  const [userBookings, setUserBookings] = useState<AdminBooking[]>([
-    {
-      user_id: "Issa Makki",
-      booking_id: 1,
-      floor_number: 5,
-      seat_number: 1,
-      start_date: "Monday",
-    },
-    {
-      user_id: "Bahaa Haidar",
-      booking_id: 2,
-      floor_number: 5,
-      seat_number: 2,
-      start_date: "Monday",
-    },
-    {
-      user_id: "Hassan Hijjawi",
-      booking_id: 3,
-      floor_number: 5,
-      seat_number: 3,
-      start_date: "Monday",
-    },
-  ]);
+  const [userBookings, setUserBookings] = useState<AdminBooking[]>([]);
 
   const [nameFilter, setNameFilter] = useState("");
   const [floorFilter, setFloorFilter] = useState("");
   const [seatFilter, setSeatFilter] = useState("");
   const [filteredBookings, setFilteredBookings] = useState<AdminBooking[]>([]);
-
-  const handleUnbook = (booking_id: number) => {
-    //Backend Integration
-  };
 
   const handleUserFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -64,8 +38,30 @@ function AdminBookingsPage() {
     setSeatFilter(event.target.value);
   };
 
+  const handleUnbook = (booking_id: string) => {
+    bookingService
+      .deleteBooking(booking_id)
+      .then(() => {
+        console.log("Booking successfully deleted");
+        setUserBookings((prevBookings) =>
+          prevBookings.filter((booking) => booking.booking_id !== booking_id)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
-    //Backend Integration
+    bookingService
+      .getAdminBookings()
+      .then((response) => {
+        console.log(response.data);
+        setUserBookings(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     const filteredBookings = userBookings.filter((booking) => {
       const userMatch = booking.user_id

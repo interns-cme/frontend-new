@@ -25,14 +25,15 @@ function AdminHomePage() {
   };
 
   return (
-    <Container>
-      <Typography variant="h2" sx={{ marginTop: "50px" }}>
+    <Container sx={{ marginTop: "50px" }}>
+      <Typography variant="h2" align="center" gutterBottom>
         Admin Dashboard
       </Typography>
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
+        flexWrap="wrap"
         height="400px"
       >
         <Paper
@@ -41,10 +42,8 @@ function AdminHomePage() {
             height: "250px",
             borderRadius: "0 0 50% 50% / 20% 20% 0 0",
             padding: "16px",
-            m: 1,
+            margin: "3.5rem",
             cursor: "pointer",
-            marginLeft: "10rem",
-            marginRight: "15rem",
             transition: "transform 0.3s ease-out",
             "&:hover": {
               transform: "scale(1.1)",
@@ -52,13 +51,18 @@ function AdminHomePage() {
           }}
           onClick={handleStatisticsClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: 800 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 800 }}
+            align="center"
+            gutterBottom
+          >
             Statistics
           </Typography>
           <CardMedia
             sx={{
               width: "100%",
-              height: "88%",
+              height: "78%",
             }}
             component="img"
             image={Statistics}
@@ -67,13 +71,12 @@ function AdminHomePage() {
 
         <Paper
           sx={{
-            width: "240px",
+            width: "250px",
             height: "250px",
             borderRadius: "0 0 50% 50% / 20% 20% 0 0",
             padding: "16px",
-            m: 1,
+            margin: "3.5rem",
             cursor: "pointer",
-            marginRight: "15rem",
             backgroundColor: "#fafafa",
             transition: "transform 0.3s ease-out",
             "&:hover": {
@@ -82,37 +85,33 @@ function AdminHomePage() {
           }}
           onClick={handleBookingsClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: 800 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 800 }}
+            align="center"
+            gutterBottom
+          >
             Reservations
           </Typography>
           <CardMedia
             sx={{
               width: "88%",
-              height: "88%",
+              height: "78%",
               backgroundColor: "#ffff",
             }}
             component="img"
             image={Booking}
           />
         </Paper>
-      </Box>
 
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="300px"
-      >
         <Paper
           sx={{
             width: "250px",
             height: "250px",
             borderRadius: "0 0 50% 50% / 20% 20% 0 0",
             padding: "16px",
-            m: 1,
+            margin: "3.5rem",
             cursor: "pointer",
-            marginLeft: "10rem",
-            marginRight: "15rem",
             backgroundColor: "#fafafa",
             transition: "transform 0.3s ease-out",
             "&:hover": {
@@ -121,13 +120,18 @@ function AdminHomePage() {
           }}
           onClick={handleHistoryClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: 800 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 800 }}
+            align="center"
+            gutterBottom
+          >
             History
           </Typography>
           <CardMedia
             sx={{
-              width: "90%",
-              height: "75%",
+              width: "85%",
+              height: "80%",
             }}
             component="img"
             image={History}
@@ -136,13 +140,12 @@ function AdminHomePage() {
 
         <Paper
           sx={{
-            width: "240px",
+            width: "250px",
             height: "250px",
             borderRadius: "0 0 50% 50% / 20% 20% 0 0",
             padding: "16px",
-            m: 1,
+            margin: "3.5rem",
             cursor: "pointer",
-            marginRight: "15rem",
             backgroundColor: "#ffff",
             transition: "transform 0.3s ease-out",
             "&:hover": {
@@ -151,13 +154,18 @@ function AdminHomePage() {
           }}
           onClick={handleEditFloorClick}
         >
-          <Typography variant="h4" sx={{ fontWeight: 800 }}>
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: 800 }}
+            align="center"
+            gutterBottom
+          >
             Edit Floor
           </Typography>
           <CardMedia
             sx={{
               width: "90%",
-              height: "88%",
+              height: "78%",
               backgroundColor: "#ffff",
             }}
             component="img"

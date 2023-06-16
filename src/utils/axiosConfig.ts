@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use(async (config) => {
         await keycloak.updateToken(5);
         return await requestWithToken(config);
       } catch (error: any) {
-        // Log out the user or handle the error as needed
+        // Log out the user
         console.error("Failed to update token:", error);
         keycloak.logout();
       }

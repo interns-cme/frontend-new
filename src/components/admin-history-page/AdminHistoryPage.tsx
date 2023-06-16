@@ -10,32 +10,10 @@ import {
 } from "@mui/material";
 import AdminHistoryPageReadOnlyRow from "./AdminHistoryPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
-import axiosInstance from "../../utils/axiosConfig";
+import { bookingService } from "../../services/bookingService";
 
 function AdminHistoryPage() {
-  const [userBookings, setUserBookings] = useState<AdminBooking[]>([
-    {
-      user_id: "Issa Makki",
-      booking_id: 1,
-      floor_number: 5,
-      seat_number: 1,
-      start_date: "Wednesday",
-    },
-    {
-      user_id: "Bahaa Haidar",
-      booking_id: 2,
-      floor_number: 5,
-      seat_number: 2,
-      start_date: "Monday",
-    },
-    {
-      user_id: "Hassan Hijjawi",
-      booking_id: 3,
-      floor_number: 5,
-      seat_number: 3,
-      start_date: "Tuesday",
-    },
-  ]);
+  const [userBookings, setUserBookings] = useState<AdminBooking[]>([]);
 
   const [nameFilter, setNameFilter] = useState("");
   const [floorFilter, setFloorFilter] = useState("");
@@ -68,10 +46,15 @@ function AdminHistoryPage() {
   };
 
   useEffect(() => {
-    //Backend Integration
-  }, []);
-
-  useEffect(() => {
+    bookingService
+      .getAdminBookings()
+      .then((response) => {
+        console.log(response.data);
+        setUserBookings(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     const filteredBookings = userBookings.filter((booking) => {
       const userMatch = booking.user_id
         .toLowerCase()
