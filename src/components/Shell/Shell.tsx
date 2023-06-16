@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import AdminHome from "../../pages/AdminHome/AdminHome";
+import AdminHome from "../../pages/admin-home/AdminHome";
 import Testimage from "../../assets/BG-Testimage.jpg";
 import Office from "../../assets/Office.jpg";
 
@@ -36,25 +36,8 @@ function Shell() {
   };
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
   const [anchorEl, setAnchorEl] = useState(null);
   const { keycloak } = useKeycloak();
-  const api = axios.create({
-    baseURL: "https://6af2-193-227-191-93.ngrok-free.app/auth",
-  });
-
-  api.interceptors.request.use(
-    (config) => {
-      if (keycloak.authenticated) {
-        console.log("authenticated");
-        config.headers.Authorization = keycloak.token;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
 
   const [currentUser, setCurrentUser] = useState<KeyCloakToken | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,7 +52,6 @@ function Shell() {
         refreshToken: keycloak.refreshToken,
         token: keycloak.token,
       });
-      localStorage.setItem("currentUser", "true");
     } else {
       setCurrentUser(null);
     }

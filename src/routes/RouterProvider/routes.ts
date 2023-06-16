@@ -1,12 +1,12 @@
-import NotFound404 from "../../components/NotFound404/NotFound404";
-import AdminBookings from "../../pages/AdminBookings/AdminBookings";
-import AdminFloorEdit from "../../pages/AdminFloorEdit/AdminFloorEdit";
-import AdminHistory from "../../pages/AdminHistory/AdminHistory";
-import AdminHome from "../../pages/AdminHome/AdminHome";
+import NotFound404 from "../../components/not-found-404/NotFound404";
+import Shell from "../../components/shell/Shell";
+import AdminBookings from "../../pages/admin-bookings/AdminBookings";
+import AdminHistory from "../../pages/admin-history/AdminHistory";
+import AdminHome from "../../pages/admin-home/AdminHome";
+import BookingArea from "../../pages/booking-area/BookingArea";
+import MyBookings from "../../pages/my-bookings/MyBookings";
 import AdminStatistics from "../../pages/AdminStatistics/AdminStatistics";
-import BookingArea from "../../pages/BookingArea/BookingArea";
-import MyBookings from "../../pages/MyBookings/MyBookings";
-
+import AdminFloorEdit from "../../pages/AdminFloorEdit/AdminFloorEdit";
 export interface RouteConfig {
   path: string;
   component: React.ComponentType;

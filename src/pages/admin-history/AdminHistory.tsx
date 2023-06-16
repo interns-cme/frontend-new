@@ -1,4 +1,4 @@
-import AdminHistoryPage from "../../components/AdminHistoryPage/AdminHistoryPage";
+import AdminHistoryPage from "../../components/admin-history-page/AdminHistoryPage";
 
 function AdminHistory() {
   return (

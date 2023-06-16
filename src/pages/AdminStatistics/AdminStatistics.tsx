@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ReservationChart from "../../components/Statistics/ReservationChart";
 import axiosInstance from "../../utils/axiosConfig";
-import { getReservations } from "../../services/statistics";
+import { statistics } from "../../services/statisticsService";
 
 const Statistics: React.FC = () => {
   const chartData = {
@@ -47,7 +47,8 @@ const Statistics: React.FC = () => {
   const [reservationsPerFloor, setReservationsPerFloor] = useState(chartData2);
 
   useEffect(() => {
-    getReservations()
+    statistics
+      .getReservations()
       .then((response) => {
         setReservations(response.data);
       })
@@ -56,8 +57,8 @@ const Statistics: React.FC = () => {
       });
   }, []);
   useEffect(() => {
-    axiosInstance
-      .get("/statistics/day-with-least-reservations")
+    statistics
+      .getLeastReservedDay()
       .then((response) => {
         console.log(response);
         setLeastReserved(response.data);
@@ -67,8 +68,8 @@ const Statistics: React.FC = () => {
       });
   }, []);
   useEffect(() => {
-    axiosInstance
-      .get("/statistics/day-with-most-reservations")
+    statistics
+      .getMostReservedDay()
       .then((response) => {
         console.log(response);
         setMostReserved(response.data);
@@ -78,8 +79,8 @@ const Statistics: React.FC = () => {
       });
   }, []);
   useEffect(() => {
-    axiosInstance
-      .get("/statistics/floor-with-most-reservations")
+    statistics
+      .getMostReseredFloor()
       .then((response) => {
         console.log(response);
         setMostReservedFloor(response.data);
@@ -89,8 +90,8 @@ const Statistics: React.FC = () => {
       });
   }, []);
   useEffect(() => {
-    axiosInstance
-      .get("/statistics/seat-with-least-reservations")
+    statistics
+      .getLeastReservedSeat()
       .then((response) => {
         console.log(response);
         setLeastReservedSeat(response.data);
@@ -100,8 +101,8 @@ const Statistics: React.FC = () => {
       });
   }, []);
   useEffect(() => {
-    axiosInstance
-      .get("/statistics/seat-with-most-reservations")
+    statistics
+      .getMostReservedSeat()
       .then((response) => {
         console.log(response);
         setMostReservedSeat(response.data);
