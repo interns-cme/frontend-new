@@ -1,3 +1,3 @@
-export interface DateProps{
-    date: Date
+export interface DateProps {
+  date: Date;
 }

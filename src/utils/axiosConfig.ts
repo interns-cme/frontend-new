@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(async (config) => {
     return await requestWithToken(config);
   } catch (error: any) {
     if (error.response && error.response.status === 401) {
-      console.log("Unauth")
+      console.log("Unauth");
       try {
         await keycloak.updateToken(5);
         return await requestWithToken(config);
@@ -33,8 +33,8 @@ async function requestWithToken(config: any) {
   const token = keycloak.token;
 
   if (token) {
-    console.log("hellooo")
-    console.log(keycloak.token)
+    console.log("hellooo");
+    console.log(keycloak.token);
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;

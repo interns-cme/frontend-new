@@ -4,7 +4,7 @@ import { AdminBooking } from "../../models/IAdminBooking.model";
 
 interface Props {
   booking: AdminBooking;
-  onUnbook: (bookingId: number) => void;
+  onUnbook: (bookingId: string) => void;
 }
 
 const AdminBookingsPageReadOnlyRow: React.FC<Props> = ({

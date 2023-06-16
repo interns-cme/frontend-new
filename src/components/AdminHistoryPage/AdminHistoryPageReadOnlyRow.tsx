@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import "../adminBookingsPage/AdminBookingsPage.css";
+import React from "react";
+import { TableRow, TableCell } from "@mui/material";
 import { AdminBooking } from "../../models/IAdminBooking.model";
 
 interface Props {
@@ -8,13 +8,43 @@ interface Props {
 
 const AdminHistoryPageReadOnlyRow: React.FC<Props> = ({ booking }) => {
   return (
-    <tr>
-      <td className="rows">{booking.user}</td>
-      <td className="rows">{booking.bookingId}</td>
-      <td className="rows">{booking.floor}</td>
-      <td className="rows">{booking.seat}</td>
-      <td className="rows">{booking.bookingDate}</td>
-    </tr>
+    <TableRow>
+      <TableCell
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {booking.user_id}
+      </TableCell>
+      <TableCell
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {booking.booking_id}
+      </TableCell>
+      <TableCell
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {booking.floor_number}
+      </TableCell>
+      <TableCell
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {booking.seat_number}
+      </TableCell>
+      <TableCell
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {booking.start_date}
+      </TableCell>
+    </TableRow>
   );
 };
 

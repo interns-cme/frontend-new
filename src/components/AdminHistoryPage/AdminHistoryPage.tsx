@@ -1,76 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "../adminBookingsPage/AdminBookingsPage.css";
+import {
+  Typography,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TextField,
+} from "@mui/material";
 import AdminHistoryPageReadOnlyRow from "./AdminHistoryPageReadOnlyRow";
 import { AdminBooking } from "../../models/IAdminBooking.model";
-
-interface User {
-  userId: number;
-  userBookings: AdminBooking[];
-}
+import { bookingService } from "../../services/bookingService";
 
 function AdminHistoryPage() {
-  const [currentUser, setCurrentUser] = useState<User>({
-    userId: 0,
-    userBookings: [
-      {
-        user: "Issa Makki",
-        bookingId: 535,
-        floor: 7,
-        seat: 64,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Bahaa Haidar",
-        bookingId: 536,
-        floor: 8,
-        seat: 62,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Hassan Hijjawi",
-        bookingId: 537,
-        floor: 7,
-        seat: 66,
-        bookingDate: "Monday",
-      },
-      {
-        user: "Youry Allam",
-        bookingId: 538,
-        floor: 7,
-        seat: 67,
-        bookingDate: "Monday",
-      },
-
-      {
-        user: "Issa Makki",
-        bookingId: 535,
-        floor: 7,
-        seat: 64,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Bahaa Haidar",
-        bookingId: 536,
-        floor: 8,
-        seat: 62,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Hassan Hijjawi",
-        bookingId: 537,
-        floor: 7,
-        seat: 66,
-        bookingDate: "Tuesday",
-      },
-      {
-        user: "Youry Allam",
-        bookingId: 538,
-        floor: 7,
-        seat: 67,
-        bookingDate: "Tuesday",
-      },
-    ],
-  });
+  const [userBookings, setUserBookings] = useState<AdminBooking[]>([]);
 
   const [nameFilter, setNameFilter] = useState("");
   const [floorFilter, setFloorFilter] = useState("");
@@ -103,117 +46,159 @@ function AdminHistoryPage() {
   };
 
   useEffect(() => {
-    const filteredBookings = currentUser.userBookings.filter((booking) => {
-      const userMatch = booking.user
+    bookingService
+      .getAdminBookings()
+      .then((response) => {
+        console.log(response.data);
+        setUserBookings(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    const filteredBookings = userBookings.filter((booking) => {
+      const userMatch = booking.user_id
         .toLowerCase()
         .includes(nameFilter.toLowerCase());
-      const floorMatch = booking.floor.toString().includes(floorFilter);
-      const seatMatch = booking.seat.toString().includes(seatFilter);
-      const dateMatch = booking.bookingDate
+      const floorMatch = booking.floor_number.toString().includes(floorFilter);
+      const seatMatch = booking.seat_number.toString().includes(seatFilter);
+      const dateMatch = booking.start_date
         .toLowerCase()
         .includes(dateFilter.toLowerCase());
       return userMatch && floorMatch && seatMatch && dateMatch;
     });
 
     setFilteredBookings(filteredBookings);
-  }, [
-    currentUser.userBookings,
-    nameFilter,
-    floorFilter,
-    seatFilter,
-    dateFilter,
-  ]);
+  }, [userBookings, nameFilter, floorFilter, seatFilter, dateFilter]);
 
   return (
-    <div className="my-bookings-container">
-      <h1
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        margin: "3% 0% 4% 0%",
+        paddingLeft: "50px",
+        width: "100%",
+      }}
+    >
+      <Typography
+        variant="h1"
         style={{
           textAlign: "left",
           marginBottom: "2rem",
           borderBottom: "dashed 1px",
-          width: "30%",
+          width: "25%",
           fontSize: "2.6rem",
         }}
       >
         Booking History
-      </h1>
+      </Typography>
 
-      <form className="filter-form">
-        <label className="filter-label" htmlFor="nameFilter">
-          User:
-        </label>
-        <input
-          type="text"
-          id="nameFilter"
-          className="filter-input"
+      <form style={{ marginBottom: "2rem", display: "flex" }}>
+        <TextField
+          label="User"
           value={nameFilter}
           onChange={handleUserFilterChange}
+          style={{ marginRight: "1rem" }}
         />
-        <br />
-
-        <label className="filter-label" htmlFor="floorFilter">
-          Floor:
-        </label>
-        <input
-          type="text"
-          id="floorFilter"
-          className="filter-input"
+        <TextField
+          label="Floor"
           value={floorFilter}
           onChange={handleFloorFilterChange}
+          style={{ marginRight: "1rem" }}
         />
-        <br />
-
-        <label className="filter-label" htmlFor="seatFilter">
-          Seat:
-        </label>
-        <input
-          type="text"
-          id="seatFilter"
-          className="filter-input"
+        <TextField
+          label="Seat"
           value={seatFilter}
           onChange={handleSeatFilterChange}
+          style={{ marginRight: "1rem" }}
         />
-        <br />
-
-        <label className="filter-label" htmlFor="dateFilter">
-          Date:
-        </label>
-        <input
-          type="text"
-          id="dateFilter"
-          className="filter-input"
+        <TextField
+          label="Date"
           value={dateFilter}
           onChange={handleDateFilterChange}
+          style={{ marginRight: "1rem" }}
         />
-        <br />
       </form>
 
-      <table className="table-design">
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Booking ID</th>
-            <th>Floor</th>
-            <th>Seat</th>
-            <th>Date</th>
-          </tr>
-        </thead>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell
+              style={{
+                fontSize: "20px",
+                backgroundColor: "#7f2c8e",
+                color: "#ffffff",
+                borderRight: "solid 1px #f5f0f8",
+                textAlign: "center",
+              }}
+            >
+              User
+            </TableCell>
+            <TableCell
+              style={{
+                fontSize: "20px",
+                backgroundColor: "#7f2c8e",
+                color: "#ffffff",
+                borderRight: "solid 1px white",
+                textAlign: "center",
+              }}
+            >
+              Booking ID
+            </TableCell>
+            <TableCell
+              style={{
+                fontSize: "20px",
+                backgroundColor: "#7f2c8e",
+                color: "#ffffff",
+                borderRight: "solid 1px white",
+                textAlign: "center",
+              }}
+            >
+              Floor
+            </TableCell>
+            <TableCell
+              style={{
+                fontSize: "20px",
+                backgroundColor: "#7f2c8e",
+                color: "#ffffff",
+                borderRight: "solid 1px white",
+                textAlign: "center",
+              }}
+            >
+              Seat
+            </TableCell>
+            <TableCell
+              style={{
+                fontSize: "20px",
+                backgroundColor: "#7f2c8e",
+                color: "#ffffff",
+                borderRight: "solid 1px white",
+                textAlign: "center",
+              }}
+            >
+              Date
+            </TableCell>
+          </TableRow>
+        </TableHead>
 
-        <tbody>
+        <TableBody>
           {filteredBookings.length > 0 ? (
             filteredBookings.map((booking) => (
               <AdminHistoryPageReadOnlyRow
-                key={booking.bookingId}
+                key={booking.booking_id}
                 booking={booking}
               />
             ))
           ) : (
-            <tr>
-              <td>No bookings found</td>
-            </tr>
+            <TableRow>
+              <TableCell colSpan={5} style={{ textAlign: "center" }}>
+                No bookings found
+              </TableCell>
+            </TableRow>
           )}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }
